@@ -1,0 +1,62 @@
+
+
+<dom-module id="file-upload">
+    <style>
+        :host {
+            display: block;
+            --primary-color: var(--paper-yellow-500);
+            --light-primary-color: var(--paper-yellow-300);
+        }
+
+        #drop-zone {
+            border: 2px dashed #bbb;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            color: #bbb;
+            font-size: 20pt;
+            font-weight: bold;
+            padding: 25px;
+            text-align: center;
+        }
+
+        #drop-zone.hover {
+            background-color: #def;
+            border-color: #777;
+            color: #777;
+        }
+
+        #progress-bar {
+            background-color: #9cf;
+            border: 1px solid #000;
+            font-size: 14px;
+            margin: 10px 0;
+            opacity: 0;
+            -webkit-transition: opacity 0.5s linear;
+            -moz-transition: opacity 0.5s linear;
+            -o-transition: opacity 0.5s linear;
+            transition: opacity 0.5s linear;
+            padding: 3px;
+        }
+
+        #progress-bar.loading {
+            opacity: 1.0;
+        }
+
+        .thumb {
+            border: 1px solid #000;
+            height: 75px;
+            margin: 10px 5px 0 0;
+        }
+
+    </style>
+
+    <template>
+
+        <h3>Using Form Input, Drag and Drop, and Reading Files</h3>
+        <input type="file" id="files" name="files[]" multiple on-change="FilesChanged" /></input>
+        <div id="drop-zone">Drop files here</div>
+        <output id="list"></output>
+        <!-- <div>{{content}}</div> -->
+    </template>
+</dom-module>

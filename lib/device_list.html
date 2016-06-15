@@ -1,0 +1,74 @@
+<!--
+  Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+<link rel="import" href="../iron-icons/maps-icons.html">
+
+<dom-module id="device-list">
+  <style>
+    :host {
+      display: block;
+    }
+    paper-card {
+      margin: 5px;
+    }
+
+    .horizontal-section{
+      padding: 25px;
+    }
+
+  </style>
+
+  <template>
+
+    <p>
+      Devicelist   - {{filter}}
+    </p>
+    <paper-input label="URL" value="{{url}}"></paper-input>
+    <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
+
+    <iron-ajax auto verbose
+          url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
+          handle-as="json"
+          last-response="{{ajaxResponse}}">
+    </iron-ajax>
+     <div class="horizontal-section">
+      <template is="dom-repeat" items="[[ajaxResponse]]" id="deviceList" filter="filterItems">
+
+          <paper-icon-item>
+            <iron-icon icon="info" item-icon>
+            </iron-icon>
+            <paper-item-body three-line>
+              <div>[[item.deviceId]]</div>
+              <div secondary>Device ID: [[item.id]]</div>
+              <div secondary>Description: [[item.description]]</div>
+              <iron-ajax auto verbose
+                    url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices/{{item.deviceId}}/appsettings/LATEST" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
+                    handle-as="json"
+                    last-response="{{settingsResponse}}">
+              </iron-ajax>
+              <div secondary>Version: [[settingsResponse.version]]</div>
+              <div secondary>URL: <a href="[[settingsResponse.url]]">[[settingsResponse.url]]</a> </div>
+              <div secondary>--- </div>
+            </paper-item-body>
+          </paper-icon-item>
+
+       <!--  <paper-card heading="[[item.deviceId]]" image="http://placehold.it/350x40/FFC107/000000">
+          <div class="card-content">
+            Device ID: [[item.id]] </br>
+            Description: [[item.description]]
+          </div>
+          <div class="card-actions">
+            <paper-button>Share</paper-button>
+            <paper-button>Explore!</paper-button>
+          </div>
+        </paper-card> -->
+          <!-- <h2><a href="[[url(item.id.videoId)]]" target="_blank">[[item.snippet.title]]</a></h2>
+          <iron-image src="[[item.snippet.thumbnails.high.url]]" width="256" height="256" sizing="cover" preload fade></iron-image> -->
+         <!--  <p>[[item.deviceId]] [[item.id]] [[item.description]]</p> -->
+
+      </template>
+    </div>
+
+  </template>
+</dom-module>

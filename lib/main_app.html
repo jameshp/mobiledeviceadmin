@@ -1,0 +1,124 @@
+<!--
+  Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<dom-module id="main-app">
+  <style>
+    :host {
+      display: block;
+      --primary-color: var(--paper-yellow-500);
+      --light-primary-color: var(--paper-yellow-300);
+    }
+
+
+    app-toolbar {
+      background-color: var(--primary-color);
+      color: var(--primary-text-color:);
+      font: var(--paper-font-display1);
+    }
+    app-drawer {
+      --app-drawer-width: 250px;
+      --app-drawer-content-container: {
+        background-color: var(--divider-color);/* #B0BEC5;*/
+      }
+    }
+
+    paper-tabs{
+        background-color: var(--light-primary-color);
+        color: var(--primary-text-color);
+        --paper-tabs-selection-bar-color: var(--primary-text-color);
+        /*font: var(--paper-font-display1);*/
+    }
+
+    /*app-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /*height: 132px;*/
+        /*color: #fff;
+        background-color: #4285f4;
+        --app-header-background-rear-layer: {
+          background-color: #0b8043;
+        };
+      }*/
+
+      .page{
+          margin: 20px;
+      }
+
+  </style>
+
+  <template>
+      <app-drawer-layout force-narrow >
+        <app-drawer id="bla" >
+          drawer-content
+        </app-drawer>
+        <app-header-layout>
+          <app-header fixed>
+            <app-toolbar>
+              <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+              <div title>Mobile Tolling Admin</div>
+                  <paper-icon-button icon="search" on-tap="toggleSearch"></paper-icon-button>
+                  <paper-input id="search"  value="{{search}}" hidden$={{searchTextHidden}} no-label-float></paper-input>
+              </app-toolbar>
+            <paper-tabs selected="{{selected}}" >
+                <paper-tab>DEVICES</paper-tab>
+                <paper-tab>CONFIGURATIONS</paper-tab>
+                <paper-tab>ITEM THREE</paper-tab>
+            </paper-tabs>
+          </app-header>
+
+          <iron-pages selected="{{selected}}">
+              <div class="page">
+                    Page 1
+                   <device-list filter="{{search}}"></device-list>
+
+              </div>
+              <div>Page 2
+                 <file-upload content={{content}}></file-upload>
+                 <div>Engine Config: {{content.engineConfig.triggerMapConfig.filterConfig.radialFilter.radius}}</div>
+               </br>
+             </br>
+                 <strong>FULL content: {{content}}</strong>
+              </div>
+              <div>Page 3
+
+                main content
+                 <paper-input id="pinput" label="Type something..." value="{{text}}"></paper-input>
+                 <p>
+                   Text: <span>{{text}}</span><br />
+                   Reversed: <span>{{reverseText(text)}}</span>
+                 </p>
+                 <p>
+                   Text: <span>{{text}}</span><br />
+                   Reversed: <span>{{reverseText(text)}}</span>
+                 </p>
+                 <p>
+                   Text: <span>{{text}}</span><br />
+                   Reversed: <span>{{reverseText(text)}}</span>
+                 </p>
+                 <p>
+                   Text: <span>{{text}}</span><br />
+                   Reversed: <span>{{reverseText(text)}}</span>
+                 </p>
+                 <p>
+                   Text: <span>{{text}}</span><br />
+                   Reversed: <span>{{reverseText(text)}}</span>
+                 </p>
+                 <p>
+                   Text: <span>{{text}}</span><br />
+                   Reversed: <span>{{reverseText(text)}}</span>
+                 </p>
+               </div>
+          </iron-pages>
+
+
+        </template>
+
+        </app-header-layout>
+      </app-drawer-layout>
+
+
+</dom-module>
