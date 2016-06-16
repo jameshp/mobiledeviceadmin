@@ -13,7 +13,8 @@ dependencies:
   polymer: ^1.0.0-rc.15
   web_components: ^0.12.0
   analyzer: 0.27.2
-  polymer_app_layout: '0.0.5' 
+  polymer_app_layout: '0.0.5'
+  google_maps: ">=2.0.0 <3.1.0"
 
 transformers:
 - polymer:

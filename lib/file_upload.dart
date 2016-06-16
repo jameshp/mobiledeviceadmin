@@ -41,7 +41,7 @@ class FileUpload extends PolymerElement {
     HtmlEscape sanitizer = new HtmlEscape();
 
     @Property(notify:true)
-    String content;
+    Map content;
     //
     // @property
     // bool searchTextHidden = true;
@@ -124,10 +124,10 @@ class FileUpload extends PolymerElement {
                 //var thumbHolder = new Element.tag('span');
                 var reader = new FileReader();
                 reader.onLoad.listen((e) {
-                    print (reader.result);
+                    //print (reader.result);
                     var content = reader.result;
                     Map jsonmap= JSON.decode(content);
-                    print (jsonmap);
+                    print ("MAP set to content attribute: $jsonmap");
                     set('content',jsonmap);
                     // var thumbnail = new ImageElement(src: reader.result);
                     // thumbnail.classes.add('thumb');

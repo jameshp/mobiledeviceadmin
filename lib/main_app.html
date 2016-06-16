@@ -77,8 +77,9 @@
 
               </div>
               <div>Page 2
-                 <file-upload content={{content}}></file-upload>
-                 <div>Engine Config: {{content.engineConfig.triggerMapConfig.filterConfig.radialFilter.radius}}</div>
+                 <file-upload content="{{content}}"></file-upload>
+                 <!-- <div>Engine Config: {{content.features}}</div> -->
+                 <features-map road-features="{{content.features}}"></features-map>
                </br>
              </br>
                  <strong>FULL content: {{content}}</strong>

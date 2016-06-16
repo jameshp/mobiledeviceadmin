@@ -33,6 +33,7 @@ import 'package:polymer_elements/default_theme.dart';
 //own custom elements imports
 import 'package:mobiledeviceadmin/device_list.dart';
 import 'package:mobiledeviceadmin/file_upload.dart';
+import 'package:mobiledeviceadmin/features_map.dart';
 
 /// Uses [PaperInput]
 @PolymerRegister('main-app')
@@ -49,7 +50,7 @@ class MainApp extends PolymerElement {
   }
 
   @Property(notify: true, observer: 'selectedChanged')
-  int selected = 0; //default selected tab
+  int selected = 1; //default selected tab
 
 
   // Constructor used to create instance of MainApp.
