@@ -1,7 +1,7 @@
 // Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 @HtmlImport('device_list.html')
-library mobiledeviceadmin.lib.device_list;		
+library mobiledeviceadmin.lib.device_list;
 
 import 'dart:html';
 import 'dart:core';
@@ -18,19 +18,41 @@ import 'package:polymer_elements/iron_icons.dart';
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 
+import 'package:mobiledeviceadmin/device_item.dart';
+
 /// Uses [PaperInput]
 @PolymerRegister('device-list')
 class DeviceList extends PolymerElement {
+
+  IronAjax _deviceRequest;
+
   @property
   String url = "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices";
-  
+
+  @Property(observer: 'ajaxErrorChanged')
+  Object ajaxError;
+
+  @property
+  String error ="no Error";
+
+  @reflectable
+  void ajaxErrorChanged(newValue, oldValue){
+    print ("AjaxError_new: ${newValue}  + ${oldValue}");
+    error = _deviceRequest.lastError;
+    print ("Ajax Error2 : ${error}");
+  }
+
+  @reflectable
+  void handleRequestError(event,target){
+    print("handle Error $event - $target");
+  }
   // @property
   // String headers = '{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}';
 
   //'{"Origin" : "http://equipmentmanager.service.sitstlproxy.gpsllab.local"}';
- 
+
   @Property(notify: true, observer: 'filterChanged', reflectToAttribute: true)
-  String filter; 
+  String filter;
 
 
   @reflectable
@@ -43,12 +65,12 @@ class DeviceList extends PolymerElement {
   filterItems(item){
     print ("filter items for:  {$item}");
     if (filter == ""){
-      return true; 
+      return true;
     }
     else {
-      String deviceID = item['deviceId']; 
+      String deviceID = item['deviceId'];
       return deviceID.contains(filter);
-    }    
+    }
   }
 
   // @Property(computed: 'computeFullName(first, last)')
@@ -88,6 +110,7 @@ class DeviceList extends PolymerElement {
  /// Called when main-app has been fully prepared (Shadow DOM created,
  /// property observers set up, event listeners attached).
   ready() {
-
+      _deviceRequest = $$('#deviceRequest');
+      print ("DevicList init done");
   }
 }

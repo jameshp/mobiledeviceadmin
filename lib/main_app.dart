@@ -49,7 +49,7 @@ class MainApp extends PolymerElement {
   }
 
   @Property(notify: true, observer: 'selectedChanged')
-  int selected = 1; //default selected tab
+  int selected = 0; //default selected tab
 
 
   // Constructor used to create instance of MainApp.
