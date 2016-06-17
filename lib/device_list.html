@@ -28,7 +28,7 @@
     <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
 
     <iron-ajax id="deviceRequest" auto verbose
-          timeout="5000"
+          timeout="10000"
           url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
           handle-as="json" loading="{{loading}}" on-error="handleRequestError"
           last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
