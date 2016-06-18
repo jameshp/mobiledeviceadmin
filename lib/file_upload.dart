@@ -22,7 +22,6 @@ import 'package:polymer_app_layout/app_header.dart';
 import 'package:polymer_app_layout/app_toolbar.dart';
 import 'package:polymer_app_layout/app_scroll_effects.dart';
 
-
 //style imports
 import 'package:polymer_elements/color.dart';
 import 'package:polymer_elements/typography.dart';
@@ -34,129 +33,195 @@ import 'dart:convert';
 /// Uses [PaperInput]
 @PolymerRegister('file-upload')
 class FileUpload extends PolymerElement {
+  InputElement _fileInput;
+  Element _dropZone;
+  OutputElement _output;
+  HtmlEscape sanitizer = new HtmlEscape();
+  FileReader _reader;
+  List<File> _files;
 
-    InputElement _fileInput;
-    Element _dropZone;
-    OutputElement _output;
-    HtmlEscape sanitizer = new HtmlEscape();
+  @property
+  String url; //Upload URL
 
-    @Property(notify:true)
-    Map content;
-    //
-    // @property
-    // bool searchTextHidden = true;
+  @Property(notify: true)
+  int loadProgress; //progress of the File API load (to the borwser)
 
-    // @reflectable
-    // toggleSearch([_, __]) {
-    //     set('searchTextHidden', !this.searchTextHidden);
-    // }
-    //
-    // @Property(notify: true, observer: 'selectedChanged')
-    // int selected = 0; //default selected tab
+  @Property(notify: true)
+  int uploadProgress; //upload progress when sent to a server
 
+  @Property(notify: true)
+  String error; //file api-error
 
-    // Constructor used to create instance of MainApp.
-    FileUpload.created() : super.created();
+  // @Property(notify: true)
+  // List<File> files;
 
-    // @reflectable
-    // String reverseText(String text) {
-    //   return text.split('').reversed.join('');
-    // }
-    //
-    // @reflectable
-    // selectedChanged(newValue,oldValue){
-    //      print ("Seleced changed from {$oldValue} to {$newValue}");
-    // }
+  @Property(notify: true)
+  Map content; //content loaded by the file API
 
-    // @reflectable
-    // void drawerChanged(String newState, String oldState) {
-    //     print ("$newState  <-->  $oldState");
-    // }
+  // Constructor used to create instance of MainApp.
+  FileUpload.created() : super.created();
 
+  /// Called when main-app has been fully prepared (Shadow DOM created,
+  /// property observers set up, event listeners attached).
+  ready() {
+    _output = $$('#list');
+    _fileInput = $$('#files');
+    _fileInput.onChange.listen((e) => _onFileInputChange());
 
+    _dropZone = $$('#drop-zone');
+    _dropZone.onDragOver.listen(_onDragOver);
+    _dropZone.onDragEnter.listen((e) => _dropZone.classes.add('hover'));
+    _dropZone.onDragLeave.listen((e) => _dropZone.classes.remove('hover'));
+    _dropZone.onDrop.listen(_onDrop);
+  }
 
-    /// Called when main-app has been fully prepared (Shadow DOM created,
-    /// property observers set up, event listeners attached).
-    ready() {
-        _output = $$('#list');
-        _fileInput = $$('#files');
-        _fileInput.onChange.listen((e) => _onFileInputChange());
+  void _onDragOver(MouseEvent event) {
+    event.stopPropagation();
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  }
 
-        _dropZone = $$('#drop-zone');
-        _dropZone.onDragOver.listen(_onDragOver);
-        _dropZone.onDragEnter.listen((e) => _dropZone.classes.add('hover'));
-        _dropZone.onDragLeave.listen((e) => _dropZone.classes.remove('hover'));
-        _dropZone.onDrop.listen(_onDrop);
+  void _onDrop(MouseEvent event) {
+    event.stopPropagation();
+    event.preventDefault();
+    _dropZone.classes.remove('hover');
+    _onFilesSelected(event.dataTransfer.files);
+  }
+
+  void _onFileInputChange() {
+    //_onFilesSelected((_fileInput as InputElement).files);
+    _onFilesSelected(_fileInput.files);
+  }
+
+  //called when file reader api finished loading
+  void _onLoad() {
+    //print (reader.result);
+    var content = _reader.result;
+    // Map jsonmap = JSON.decode(content);
+    // print("MAP set to content attribute: $jsonmap");
+    set('content', content);
+    set('loadProgress', 100);
+    sendFileContent(content);
+    // var thumbnail = new ImageElement(src: reader.result);
+    // thumbnail.classes.add('thumb');
+    // thumbnail.title = sanitizer.convert(file.name);
+    // thumbHolder.nodes.add(thumbnail);
+  }
+
+  //called while file reader API is in progress of loading the whole file
+  //sets the progress attribute to the corresponding progress value
+  //Note: future improvement: breaking file upload into junks
+  void _onProgress(ProgressEvent event) {
+    print("on Progress called");
+    if (event.lengthComputable) {
+      var percentLoaded = (100 * event.loaded / event.total).round().toInt();
+      print(
+          "percent loaded: $percentLoaded - ${event.loaded}  from ${event.total} ");
+      set('loadProgress', percentLoaded);
     }
+  }
 
-    void _onDragOver(MouseEvent event) {
-        event.stopPropagation();
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'copy';
+  //calle in case of some error  - sets the error property
+  void _onError() {
+    switch (_reader.error.code) {
+      case FileError.NOT_FOUND_ERR:
+        set('error', 'File not found!');
+        window.alert('File not found!');
+        break;
+      case FileError.NOT_READABLE_ERR:
+        set('error', 'File not found!');
+        window.alert('File is not readable.');
+        break;
+      case FileError.ABORT_ERR:
+        set('error', 'Abort Error!');
+        break; // no-op.
+      default:
+        set('error', 'An error occurred reading this file.');
+        window.alert('An error occurred reading this file.');
+        break;
     }
+  }
 
-    void _onDrop(MouseEvent event) {
-        event.stopPropagation();
-        event.preventDefault();
-        _dropZone.classes.remove('hover');
-        _onFilesSelected(event.dataTransfer.files);
-    }
+  // @reflectable
+  // void FilesChanged(event, __) {
+  //   print("Files Changed fired! {$event}  : {$__}");
+  //   _onFilesSelected(_fileInput.files);
+  // }
 
-    void _onFileInputChange() {
-        //_onFilesSelected((_fileInput as InputElement).files);
-        _onFilesSelected(_fileInput.files);
-    }
+  void _onFilesSelected(List<File> files) {
+    _output.nodes.clear();
+    set('loadProgress', 0);
+    set('uploadProgress', 0);
+    var list = new Element.tag('ul');
+    for (var file in files) {
+      var item = new Element.tag('li');
+      // If the file is an image, read and display its thumbnail.
+      if (true /*file.type.endsWith('txt')*/) {
+        //var thumbHolder = new Element.tag('span');
+        _reader = new FileReader();
+        _reader.onProgress.listen((e) => _onProgress(e));
+        _reader.onError.listen((e) => _onError());
+        _reader.onLoad.listen((e) => _onLoad());
+        //_reader.readAsText(file);
+        _reader.readAsDataUrl(file);
+        //item.nodes.add(thumbHolder);
+      }
 
-    @reflectable
-    void FilesChanged(event,__){
-        print ("Files Changed fired! {$event}  : {$__}");
-        _onFilesSelected(_fileInput.files);
-    }
-
-    void _onFilesSelected(List<File> files) {
-        _output.nodes.clear();
-        var list = new Element.tag('ul');
-        for (var file in files) {
-            var item = new Element.tag('li');
-
-            // If the file is an image, read and display its thumbnail.
-            if (true /*file.type.endsWith('txt')*/) {
-                //var thumbHolder = new Element.tag('span');
-                var reader = new FileReader();
-                reader.onLoad.listen((e) {
-                    //print (reader.result);
-                    var content = reader.result;
-                    Map jsonmap= JSON.decode(content);
-                    print ("MAP set to content attribute: $jsonmap");
-                    set('content',jsonmap);
-                    // var thumbnail = new ImageElement(src: reader.result);
-                    // thumbnail.classes.add('thumb');
-                    // thumbnail.title = sanitizer.convert(file.name);
-                    // thumbHolder.nodes.add(thumbnail);
-                });
-                reader.readAsText(file);
-                //item.nodes.add(thumbHolder);
-            }
-
-            // For all file types, display some properties.
-            var properties = new Element.tag('span');
-            properties.innerHtml = (new StringBuffer('<strong>')
+      // For all file types, display some properties.
+      var properties = new Element.tag('span');
+      properties.innerHtml = (new StringBuffer('<strong>')
             ..write(sanitizer.convert(file.name))
             ..write('</strong> (')
             ..write(file.type != null ? sanitizer.convert(file.type) : 'n/a')
             ..write(') ')
             ..write(file.size)
             ..write(' bytes')
-            // TODO(jason9t): Re-enable this when issue 5070 is resolved.
-            // http://code.google.com/p/dart/issues/detail?id=5070
-            // ..add(', last modified: ')
-            // ..add(file.lastModifiedDate != null ?
-            //       file.lastModifiedDate.toLocal().toString() :
-            //       'n/a')
-        ).toString();
-        item.nodes.add(properties);
-        list.nodes.add(item);
+          // TODO(jason9t): Re-enable this when issue 5070 is resolved.
+          // http://code.google.com/p/dart/issues/detail?id=5070
+          // ..add(', last modified: ')
+          // ..add(file.lastModifiedDate != null ?
+          //       file.lastModifiedDate.toLocal().toString() :
+          //       'n/a')
+          )
+          .toString();
+      item.nodes.add(properties);
+      list.nodes.add(item);
     }
     _output.nodes.add(list);
-}
+  }
+
+  sendFileContent(dynamic data) {
+    set('uploadProgress', 0);
+    if (url == "") {
+      set('error', "no URL defined");
+      return;
+    }
+
+    FormData fdata = new FormData(); // from dart:html
+    fdata.append("file", data);
+
+
+    HttpRequest req = new HttpRequest();
+    req.open("POST", url, async: true);
+    req.setRequestHeader("Content-type", "multipart/form-data");
+    req.send(fdata);
+    req.onProgress.listen((e) => _onUploadProgress(e));
+
+    req.onReadyStateChange.listen((Event e) {
+      if (req.readyState == HttpRequest.DONE &&
+          (req.status == 200 || req.status == 0)) {
+        set('uploadProgress', 100);
+      }
+    });
+  }
+
+  void _onUploadProgress(ProgressEvent event) {
+    //print ("file Upload on Progress called");
+    if (event.lengthComputable) {
+      var percentLoaded = (100 * event.loaded / event.total).round().toInt();
+      //print ("File upload progress: $percentLoaded - ${event.loaded}  from ${event.total} ");
+      set('uploadProgress', percentLoaded);
+    }
+   }
+
 }

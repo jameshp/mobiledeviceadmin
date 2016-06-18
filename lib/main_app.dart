@@ -13,6 +13,7 @@ import 'package:polymer_elements/iron_pages.dart';
 import 'package:polymer_elements/paper_icon_item.dart';
 import 'package:polymer_elements/paper_tab.dart';
 import 'package:polymer_elements/paper_tabs.dart';
+import 'package:polymer_elements/paper_progress.dart';
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 
