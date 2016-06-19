@@ -87,10 +87,28 @@
                  <paper-progress class="transiting" value="{{progress}}"></paper-progress>
                  Upload Progress
                  <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
+                 <file-upload url="http://localhost:8088/fileupload/"
+                              content="{{content}}"
+                              upload-progress="{{uploadprogress}}"
+                              load-progress="{{progress}}"
+                              error="{{error}}"
+                              file-name="{{filename}}"
+                              file-size="{{filesize}}"
+                              files="{{files}}">
+                 </file-upload>
 
-                 <file-upload url="http://localhost:8088/fileupload/" content="{{content}}" upload-progress="{{uploadprogress}}" load-progress="{{progress}}" error={{error}}></file-upload>
-                 <div>Full Content: {{content}}</div>
-                 <div>Error?: {{error}}</div>
+                 <template is="dom-repeat" items="[[files]]" id="files">
+                     <div>File Name: [[item.fileName]]</div>
+                     <div>File Size: [[item.fileSize]]</div>
+                     <div>File Type: [[item.fileType]]</div>
+                     <div>File content: [[item.content]]</div>
+                     <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress>
+                     <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
+                 </template>
+
+                 <div>Filename: {{filename}}  - Filesize: {{filesize}} </div>
+                 <!-- <div>Full Content: {{content}}</div> -->
+                 <div>Error: {{error}}</div>
                  <div>Progress: {{progress}}</div>
                  <features-map road-features="{{content.features}}"></features-map>
                </br>
