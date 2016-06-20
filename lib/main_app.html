@@ -83,17 +83,12 @@
 
               </div>
               <div>Page 2
-                 Load Progress
-                 <paper-progress class="transiting" value="{{progress}}"></paper-progress>
                  Upload Progress
                  <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
                  <file-upload url="http://localhost:8088/fileupload/"
                               content="{{content}}"
-                              upload-progress="{{uploadprogress}}"
-                              load-progress="{{progress}}"
+                              upload-progress="{{uploadProgress}}"
                               error="{{error}}"
-                              file-name="{{filename}}"
-                              file-size="{{filesize}}"
                               files="{{files}}">
                  </file-upload>
 
@@ -104,13 +99,13 @@
                      <div>File content: [[item.content]]</div>
                      <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress>
                      <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
+                     <div>ERROR: [[item.error]]</div>
                  </template>
 
-                 <div>Filename: {{filename}}  - Filesize: {{filesize}} </div>
-                 <!-- <div>Full Content: {{content}}</div> -->
                  <div>Error: {{error}}</div>
-                 <div>Progress: {{progress}}</div>
-                 <features-map road-features="{{content.features}}"></features-map>
+                 <div>Overall Progress: <paper-progress class="transiting" value="{{uploadProgress}}"></paper-progress></div>
+
+                 <!-- <features-map road-features="{{content.features}}"></features-map> -->
                </br>
              </br>
                  <strong>FULL content: {{content}}</strong>

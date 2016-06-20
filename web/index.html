@@ -28,7 +28,12 @@
   <meta name="msapplication-TileColor" content="#3372DF">
 
   <!--  Polyfill of Custom Elements and HTML Imports -->
-  <script src="packages/web_components/webcomponents-lite.min.js"></script>
+  <!-- <script src="packages/web_components/webcomponents-lite.min.js"></script> -->
+
+  <!-- ie11 support-->
+  <script src="packages/web_components/webcomponents.min.js"></script>
+  <script src="packages/web_components/dart_support.js"></script>
+
 
   <script defer type="application/dart" src="index.dart"></script>
   <script defer src="packages/browser/dart.js"></script>
@@ -41,6 +46,6 @@
 
 <body unresolved fullbleed>
   <main-app></main-app>
- 
+
 </body>
 </html>

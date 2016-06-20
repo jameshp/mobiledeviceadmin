@@ -63,12 +63,9 @@ class UploadFile extends JsProxy {
     this.fileSize = file.size;
     this.fileType = file.type;
     this.loadProgress = 0;
-    this.uploadProgress =0;
+    this.uploadProgress = 0;
   }
-
-
 }
-
 
 @PolymerRegister('file-upload')
 class FileUpload extends PolymerElement {
@@ -76,45 +73,23 @@ class FileUpload extends PolymerElement {
   Element _dropZone;
   OutputElement _output;
   HtmlEscape sanitizer = new HtmlEscape();
-  FileReader _reader;
 
   @property
   String url; //Upload URL
 
   @Property(notify: true)
-  int loadProgress; //progress of the File API load (to the borwser)
-
-  @Property(notify: true)
   int uploadProgress; //upload progress when sent to a server
 
   @Property(notify: true)
-  String error; //file api-error
+  String error; //upload progress when sent to a server
 
   @Property(notify: true)
   List<UploadFile> files = [];
 
-  @Property(notify: true)
-  Map content; //content loaded by the file API
-
-  @Property(notify: true)
-  String fileName;
-
-  @Property(notify: true)
-  int fileSize;
-
   @reflectable
-  void clicked(_,__){
-      print ("oasch clicked");
-      var i = 0;
-      for (UploadFile f in files){
-          var index = files.indexOf(f);
-          print ("index: ${index}");
-          var path = "files.${index}.content";
-          print ("path: ${path}");
-          set(path, "super OASCH content ${i}");
-          i = i+1;
-          //f.content = "OASCH content $i";
-      }
+  void clicked(_, __) {
+    print("Do Upload clicked");
+    doFileUpload();
   }
 
   // Constructor used to create instance of MainApp.
@@ -148,21 +123,19 @@ class FileUpload extends PolymerElement {
   }
 
   void _onFileInputChange() {
-    //_onFilesSelected((_fileInput as InputElement).files);
     _onFilesSelected(_fileInput.files);
   }
 
   //called when file reader api finished loading
-  void _onLoad(UploadFile f) {
+  void _onLoad(UploadFile f, FileReader _reader) {
+    var index = files.indexOf(f);
+    print("index: ${index}");
+    var path = "files.${index}.content";
+    print("path: ${path}");
+    set(path, _reader.result);
 
-      var index = files.indexOf(f);
-      print ("index: ${index}");
-      var path = "files.${index}.content";
-      print ("path: ${path}");
-      set(path, _reader.result); //TODO check if this is really the correct reader??!
-
-      path = "files.${index}.loadProgress";
-      set(path, 100);
+    path = "files.${index}.loadProgress";
+    set(path, 100);
     //print (reader.result);
     //var content = _reader.result;
     // Map jsonmap = JSON.decode(content);
@@ -171,7 +144,7 @@ class FileUpload extends PolymerElement {
     // set('loadProgress', 100);
 
     //TODO!!! -
-    sendFileContent(f.content);
+    doFileUpload(f);
     // var thumbnail = new ImageElement(src: reader.result);
     // thumbnail.classes.add('thumb');
     // thumbnail.title = sanitizer.convert(file.name);
@@ -185,53 +158,46 @@ class FileUpload extends PolymerElement {
     print("on Progress called");
     if (event.lengthComputable) {
       var percentLoaded = (100 * event.loaded / event.total).round().toInt();
-      print("percent loaded: $percentLoaded - ${event.loaded}  from ${event.total} ");
+      print(
+          "percent loaded: $percentLoaded - ${event.loaded}  from ${event.total} ");
 
       var index = files.indexOf(f);
-      print ("index: ${index}");
+      print("index: ${index}");
       var path = "files.${index}.loadProgress";
-      print ("path: ${path}");
+      print("path: ${path}");
       set(path, percentLoaded);
 
-      //set('loadProgress', percentLoaded);
     }
   }
 
   //calle in case of some error  - sets the error property
-  void _onError(UploadFile f) {
-      var index = files.indexOf(f);
-      print ("index: ${index}");
-      var path = "files.${index}.error";
-      print ("path: ${path}");
+  void _onError(UploadFile f, FileReader _reader) {
+    print ("ON ERROR called");
+    var index = files.indexOf(f);
+    print("index: ${index}");
+    var path = "files.${index}.error";
+    print("path: ${path}");
     switch (_reader.error.code) {
       case FileError.NOT_FOUND_ERR:
         set(path, 'File not found!');
-        window.alert('File not found!');
+        //window.alert('File not found!');
         break;
       case FileError.NOT_READABLE_ERR:
         set(path, 'File not found!');
-        window.alert('File is not readable.');
+        //window.alert('File is not readable.');
         break;
       case FileError.ABORT_ERR:
         set(path, 'Abort Error!');
         break; // no-op.
       default:
         set(path, 'An error occurred reading this file.');
-        window.alert('An error occurred reading this file.');
+        //window.alert('An error occurred reading this file.');
         break;
     }
   }
 
-  // @reflectable
-  // void FilesChanged(event, __) {
-  //   print("Files Changed fired! {$event}  : {$__}");
-  //   _onFilesSelected(_fileInput.files);
-  // }
-
   void _onFilesSelected(List<File> files) {
     _output.nodes.clear();
-    set('loadProgress', 0);
-    set('uploadProgress', 0);
     var list = new Element.tag('ul');
     clear('files');
     for (var file in files) {
@@ -239,16 +205,8 @@ class FileUpload extends PolymerElement {
       // If the file is an image, read and display its thumbnail.
       if (true /*file.type.endsWith('txt')*/) {
         UploadFile f = new UploadFile(file);
-        add('files',f);
-        doFileUpload(f);
-        //var thumbHolder = new Element.tag('span');
-
-        //
-        // set('fileName', file.name);
-        // set('fileSize', file.size);
-
-        //let's try to support multiple files
-
+        add('files', f);
+        readFileContent(f);
       }
 
       // For all file types, display some properties.
@@ -274,14 +232,13 @@ class FileUpload extends PolymerElement {
     _output.nodes.add(list);
   }
 
-  void doFileUpload(UploadFile f){
-      _reader = new FileReader();
-      _reader.onProgress.listen((e) => _onProgress(e, f));
-      _reader.onError.listen((e) => _onError(f));
-      _reader.onLoad.listen((e) => _onLoad(f));
-      //_reader.readAsText(file);
-      _reader.readAsDataUrl(f.file);
-      // //item.nodes.add(thumbHolder);
+  void readFileContent(UploadFile f) {
+    FileReader _reader = new FileReader();
+    _reader.onProgress.listen((e) => _onProgress(e, f));
+    _reader.onError.listen((e) => _onError(f, _reader));
+    _reader.onLoad.listen((e) => _onLoad(f, _reader));
+    //_reader.readAsText(file);
+    _reader.readAsDataUrl(f.file);
   }
 
   @Observe('files.*')
@@ -298,39 +255,63 @@ class FileUpload extends PolymerElement {
     }
   }
 
-  sendFileContent(dynamic data) {
-    set('uploadProgress', 0);
+  void doFileUpload([UploadFile uploadFile]) {
+    print("Real File Uploads started");
+    List<UploadFile> processFiles = [];
+
     if (url == "") {
       set('error', "no URL defined");
       return;
     }
 
-    FormData fdata = new FormData(); // from dart:html
-    fdata.append("file", data);
-    fdata.append("filename", fileName);
-    fdata.append("filesize", fileSize.toString());
-    //fdata.appendBlob("file2", data, "file2 super filename.txt"); //I thought this would set the filename... but it does not.
+    //to switch between auto upload and manual triggerd
+    if (uploadFile != null) {
+      processFiles.add(uploadFile);
+    } else {
+      processFiles = this.files;
+    }
 
-    HttpRequest req = new HttpRequest();
-    req.open("POST", url, async: true);
-    //req.setRequestHeader("Content-type", "multipart/form-data");  //this works on chrome and firefox, but edge doubles the "multipart/form-adat" entry)
-    req.send(fdata);
-    req.onProgress.listen((e) => _onUploadProgress(e));
+    for (UploadFile f in files) {
+      var index = files.indexOf(f);
+      var path = "files.${index}.uploadProgress";
+      set(path, 0);
 
-    req.onReadyStateChange.listen((Event e) {
-      if (req.readyState == HttpRequest.DONE &&
-          (req.status == 200 || req.status == 0)) {
-        set('uploadProgress', 100);
-      }
-    });
+      FormData fdata = new FormData(); // from dart:html
+      fdata.append("file", f.content);
+      fdata.append("filename", f.fileName);
+      fdata.append("filesize", f.fileSize.toString());
+      //fdata.appendBlob("file2", data, "file2 super filename.txt"); //I thought this would set the filename... but it does not.
+
+      HttpRequest req = new HttpRequest();
+      req.open("POST", url, async: true);
+      //req.setRequestHeader("Content-type", "multipart/form-data");  //this works on chrome and firefox, but edge doubles the "multipart/form-adat" entry)
+      req.send(fdata);
+      req.onProgress.listen((e) => _onUploadProgress(e, f));
+      req.onError.listen((e) => _onUploadError(e));
+      req.onReadyStateChange.listen((Event e) {
+        if (req.readyState == HttpRequest.DONE &&
+            (req.status == 200 || req.status == 0)) {
+          set('uploadProgress', 100);
+        }
+      });
+    }
   }
 
-  void _onUploadProgress(ProgressEvent event) {
-    //print ("file Upload on Progress called");
+  void _onUploadError(ErrorEvent event){
+    var error = event.toString();
+    window.alert('An error occurred uploading this file. ${error}');
+  }
+
+  void _onUploadProgress(ProgressEvent event, UploadFile f) {
+    print("Real File Upload on Progress called");
+    var index = files.indexOf(f);
+    print("index: ${index}");
+    var path = "files.${index}.uploadProgress";
+    print("path: ${path}");
+
     if (event.lengthComputable) {
       var percentLoaded = (100 * event.loaded / event.total).round().toInt();
-      //print ("File upload progress: $percentLoaded - ${event.loaded}  from ${event.total} ");
-      set('uploadProgress', percentLoaded);
+      set(path, percentLoaded);
     }
   }
 }
