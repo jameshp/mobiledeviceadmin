@@ -16,6 +16,7 @@ import 'package:polymer_elements/paper_spinner.dart';
 import 'package:polymer_elements/iron_ajax.dart';
 import 'package:polymer_elements/iron_icon.dart';
 import 'package:polymer_elements/iron_icons.dart';
+import 'package:polymer_elements/hardware_icons.dart';
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 

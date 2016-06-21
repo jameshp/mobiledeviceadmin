@@ -67,7 +67,7 @@
               <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
               <div title>Mobile Tolling Admin</div>
                   <paper-icon-button icon="search" on-tap="toggleSearch"></paper-icon-button>
-                  <paper-input id="search"  value="{{search}}" hidden$={{searchTextHidden}} no-label-float></paper-input>
+                  <paper-input id="search" type="search"  value="{{search}}" hidden$={{searchTextHidden}} no-label-float></paper-input>
               </app-toolbar>
             <paper-tabs selected="{{selected}}" >
                 <paper-tab>DEVICES</paper-tab>
@@ -78,9 +78,7 @@
 
           <iron-pages selected="{{selected}}">
               <div class="page">
-                    Page 1
-                   <device-list filter="{{search}}"></device-list>
-
+                  <device-list filter="{{search}}"></device-list>
               </div>
               <div>Page 2
                  Upload Progress
@@ -99,7 +97,7 @@
                      <div>File content: [[item.content]]</div>
                      <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress>
                      <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
-                     <div>ERROR: [[item.error]]</div>
+                     <div>File Error: [[item.error]]</div>
                  </template>
 
                  <div>Error: {{error}}</div>

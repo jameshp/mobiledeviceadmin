@@ -287,7 +287,7 @@ class FileUpload extends PolymerElement {
       //req.setRequestHeader("Content-type", "multipart/form-data");  //this works on chrome and firefox, but edge doubles the "multipart/form-adat" entry)
       req.send(fdata);
       req.onProgress.listen((e) => _onUploadProgress(e, f));
-      req.onError.listen((e) => _onUploadError(e));
+      req.onError.listen((e) => _onUploadError(e, f));
       req.onReadyStateChange.listen((Event e) {
         if (req.readyState == HttpRequest.DONE &&
             (req.status == 200 || req.status == 0)) {
@@ -297,9 +297,16 @@ class FileUpload extends PolymerElement {
     }
   }
 
-  void _onUploadError(ErrorEvent event){
-    var error = event.toString();
-    window.alert('An error occurred uploading this file. ${error}');
+  void _onUploadError(ProgressEvent event, UploadFile f){
+    var index = files.indexOf(f);
+    var path = "files.${index}.error";
+    print("error path: ${path}");
+    // HttpRequest x = event.target;
+    // print ("unsent status: ${HttpRequest.UNSENT}");
+    // print (x);
+    // error = x.statusText + " : " + x.status.toString() + " : " + x.readyState.toString();
+    set(path, "Upload failed");
+    //window.alert('An error occurred uploading this file. ${error}');
   }
 
   void _onUploadProgress(ProgressEvent event, UploadFile f) {

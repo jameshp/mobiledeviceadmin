@@ -14,17 +14,14 @@
     }
 
     .horizontal-section{
-      padding: 25px;
+      /*padding: 25px;*/
     }
 
   </style>
 
   <template>
 
-    <p>
-      Devicelist   - {{filter}}
-    </p>
-    <paper-input label="URL" value="{{url}}"></paper-input>
+    <paper-input hidden label="URL" value="{{url}}"></paper-input>
     <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
 
     <iron-ajax id="deviceRequest" auto verbose
@@ -34,12 +31,14 @@
           last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
     </iron-ajax>
      <div class="horizontal-section">
-      <paper-spinner active="{{loading}}"></paper-spinner>
+      <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
       <div>{{ajaxError}}</div>
       <div>{{error}}</div>
+      <paper-material elevation="1">
       <template is="dom-repeat" items="[[ajaxResponse]]" id="deviceList" filter="filterItems">
           <device-item data=[[item]]></device-item>
       </template>
+    </paper-material>
     </div>
 
   </template>

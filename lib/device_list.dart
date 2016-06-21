@@ -9,6 +9,7 @@ import 'dart:core';
 import 'package:polymer_elements/paper_input.dart';
 import 'package:polymer_elements/paper_card.dart';
 import 'package:polymer_elements/paper_button.dart';
+import 'package:polymer_elements/paper_material.dart';
 import 'package:polymer_elements/paper_item.dart';
 import 'package:polymer_elements/paper_icon_item.dart';
 import 'package:polymer_elements/paper_item_body.dart';
@@ -33,13 +34,13 @@ class DeviceList extends PolymerElement {
   Object ajaxError;
 
   @property
-  String error ="no Error";
+  String error ="";
 
   @reflectable
   void ajaxErrorChanged(newValue, oldValue){
     print ("AjaxError_new: ${newValue}  + ${oldValue}");
-    error = _deviceRequest.lastError;
-    print ("Ajax Error2 : ${error}");
+    set('error', _deviceRequest.lastError);
+    print ("Ajax Error2 : ${_deviceRequest.lastError}");
   }
 
   @reflectable
