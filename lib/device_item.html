@@ -7,7 +7,7 @@
     }
 
     paper-icon-item{
-      padding: 8px 16px 8px 16px; 
+      padding: 8px 16px 8px 16px;
     }
 
   </style>
@@ -25,19 +25,24 @@
               handle-as="json"
               last-response="{{settingsResponse}}">
         </iron-ajax>
-        <div secondary>
-          <iron-icon icon="info" item-icon>   </iron-icon>
-          App Settings Version: [[settingsResponse.version]]</div>
-        <div secondary>URL: <a href="[[settingsResponse.url]]">[[settingsResponse.url]]</a> </div>
+        <div secondary hidden$="[[!settingsResponse.version]]">
+          <iron-icon icon="settings-applications" item-icon>   </iron-icon>
+          App Settings Version: [[settingsResponse.version]]
+          <div>URL: <a href="[[settingsResponse.url]]">[[settingsResponse.url]]</a> </div>
+        </div>
+
 
         <iron-ajax auto verbose
               url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices/{{data.deviceId}}/roadfeatures/LATEST" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
               handle-as="json"
               last-response="{{roadFeaturesResponse}}">
         </iron-ajax>
-        <template is="dom-if" if="{{roadFeaturesResponse.roadFeature.version}}">
-          <div secondary>Roadfeature version: {{roadFeaturesResponse.roadFeature.version}} </div>
-        </template>
+        <!-- <template is="dom-if" if="{{roadFeaturesResponse.roadFeature.version}}"> -->
+
+          <div secondary hidden$="{{!roadFeaturesResponse.roadFeature.version}}">
+            <iron-icon icon="maps:map" item-icon>   </iron-icon> Roadfeature version: {{roadFeaturesResponse.roadFeature.version}}
+          </div>
+        <!-- </template> -->
       </paper-item-body>
     </paper-icon-item>
 

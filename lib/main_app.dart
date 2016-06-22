@@ -13,7 +13,19 @@ import 'package:polymer_elements/iron_pages.dart';
 import 'package:polymer_elements/paper_icon_item.dart';
 import 'package:polymer_elements/paper_tab.dart';
 import 'package:polymer_elements/paper_tabs.dart';
+import 'package:polymer_elements/paper_fab.dart';
 import 'package:polymer_elements/paper_progress.dart';
+
+//paper dialog imports
+import 'package:polymer_elements/paper_dialog.dart';
+import 'package:polymer_elements/neon_animation.dart';
+import 'package:polymer_elements/neon_animatable.dart';
+import 'package:polymer_elements/neon_animation/animations/scale_up_animation.dart';
+import 'package:polymer_elements/neon_animation/animations/fade_out_animation.dart';
+
+
+import 'package:polymer_elements/iron_form.dart';
+
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 
@@ -67,6 +79,26 @@ class MainApp extends PolymerElement {
        print ("Seleced changed from {$oldValue} to {$newValue}");
   }
 
+  @reflectable
+  showAddDeviceDialog(_,__){
+    PaperDialog d = this.$$('#AddDeviceDialog');
+    d.open();
+  }
+
+  @reflectable
+  void addDevice(_,__){
+    IronForm f = $$('#deviceform');
+    f.submit();
+  }
+
+  @reflectable
+  void onDeviceResponseReceived(event,target){
+    print ("$event : $target");
+    PaperDialog d = this.$$('#AddDeviceDialog');
+    d.close();
+    DeviceList l = $$('#devicelist');
+    l.reloadList();
+  }
   // @reflectable
   // void drawerChanged(String newState, String oldState) {
   //     print ("$newState  <-->  $oldState");

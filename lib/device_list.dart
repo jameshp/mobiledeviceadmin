@@ -74,6 +74,10 @@ class DeviceList extends PolymerElement {
     }
   }
 
+  @reflectable
+  reloadList(){
+    this._deviceRequest.generateRequest();
+  }
   // @Property(computed: 'computeFullName(first, last)')
   // String fullName;
 

@@ -37,6 +37,10 @@
       --paper-progress-transition-transition-delay: 0s;
     }
 
+    paper-input{
+      padding: 0px 25px 0px 25px;
+    }
+
     /*app-header {
         position: fixed;
         top: 0;
@@ -52,6 +56,12 @@
 
       .page{
           margin: 20px;
+      }
+
+      .fab-button{
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
       }
 
   </style>
@@ -71,14 +81,39 @@
               </app-toolbar>
             <paper-tabs selected="{{selected}}" >
                 <paper-tab>DEVICES</paper-tab>
-                <paper-tab>CONFIGURATIONS</paper-tab>
-                <paper-tab>ITEM THREE</paper-tab>
+                <paper-tab>APP SETTINGS</paper-tab>
+                <paper-tab>ROAD FEATURE SETTINGS</paper-tab>
             </paper-tabs>
           </app-header>
 
           <iron-pages selected="{{selected}}">
               <div class="page">
-                  <device-list filter="{{search}}"></device-list>
+                  <device-list id="devicelist" filter="{{search}}"></device-list>
+                  <paper-fab class="fab-button" icon="add" on-tap="showAddDeviceDialog"></paper-fab>
+                  <paper-dialog id="AddDeviceDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+                    <h2>Add a device</h2>
+                    <paper-dialog-scrollable>
+                      <form is="iron-form" method="post"
+                                           action="http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices"
+                                           headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
+                                           on-iron-form-response="onDeviceResponseReceived"
+                                           id="deviceform"
+                                           content-type="application/json">
+                        <paper-input name="deviceId" label="Device ID" required></paper-input>
+                        <br>
+                        <paper-input name="description" label="Description" required></paper-input><br>
+                        <paper-input name="type" value="SMARTPHONE" hidden></paper-input><br>
+                        <!-- <paper-button raised onclick="_submit(event)">Submit</paper-button>
+                        <paper-button raised onclick="_reset(event)">Reset</paper-button> -->
+                        <div class="output"></div>
+                      </form>
+                    </paper-dialog-scrollable>
+                    <div class="buttons">
+                      <paper-button raised dialog-dismiss>CANCEL</paper-button>
+                      <paper-button raised on-tap="addDevice">ADD DEVICE</paper-button>
+                    </div>
+                  </paper-dialog>
+
               </div>
               <div>Page 2
                  Upload Progress
