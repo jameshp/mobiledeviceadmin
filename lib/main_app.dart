@@ -45,6 +45,7 @@ import 'package:polymer_elements/default_theme.dart';
 
 //own custom elements imports
 import 'package:mobiledeviceadmin/device_list.dart';
+import 'package:mobiledeviceadmin/appsettings_list.dart';
 import 'package:mobiledeviceadmin/file_upload.dart';
 import 'package:mobiledeviceadmin/features_map.dart';
 
@@ -99,6 +100,13 @@ class MainApp extends PolymerElement {
     DeviceList l = $$('#devicelist');
     l.reloadList();
   }
+
+  @reflectable
+  showAddAppsettingsDialog(_,__){
+    PaperDialog d = this.$$('#AddAppsettingsDialog');
+    d.open();
+  }
+
   // @reflectable
   // void drawerChanged(String newState, String oldState) {
   //     print ("$newState  <-->  $oldState");

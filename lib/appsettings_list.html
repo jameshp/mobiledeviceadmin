@@ -1,0 +1,39 @@
+<dom-module id="appsettings-list">
+  <style>
+    :host {
+      display: block;
+    }
+    paper-card {
+      margin: 5px;
+    }
+
+    .horizontal-section{
+      /*padding: 25px;*/
+    }
+
+  </style>
+
+  <template>
+
+    <paper-input hidden label="URL" value="{{url}}"></paper-input>
+    <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
+
+    <iron-ajax id="appsettingsRequest" auto verbose
+          timeout="10000"
+          url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
+          handle-as="json" loading="{{loading}}" on-error="handleRequestError"
+          last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
+    </iron-ajax>
+     <div class="horizontal-section">
+      <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
+      <div>{{ajaxError}}</div>
+      <div>{{error}}</div>
+      <paper-material elevation="1">
+      <template is="dom-repeat" items="[[ajaxResponse]]" id="appsettingsList" filter="filterItems">
+          <appsettings-item data=[[item]]></device-item>
+      </template>
+    </paper-material>
+    </div>
+
+  </template>
+</dom-module>

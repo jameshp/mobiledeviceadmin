@@ -1,0 +1,33 @@
+
+
+<dom-module id="appsettings-item">
+  <style>
+    :host {
+      display: block;
+    }
+
+    paper-icon-item{
+      padding: 8px 16px 8px 16px;
+    }
+
+  </style>
+
+  <template>
+    <paper-icon-item>
+      <iron-icon icon="hardware:smartphone" item-icon>
+      </iron-icon>
+      <paper-item-body three-line>
+        <div>[[data.deviceId]]</div>
+        <div secondary>App Settings ID: [[data.id]]</div>
+        <div secondary>Description: [[data.description]]</div>
+        <div secondary>
+          <iron-icon icon="settings-applications" item-icon>   </iron-icon>
+          App Settings Version: [[data.version]]
+          <div>State: [[data.state]] </div>
+        </div>
+      </paper-item-body>
+    </paper-icon-item>
+
+  </template>
+
+</dom-module>

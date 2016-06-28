@@ -4,44 +4,44 @@
 -->
 
 <dom-module id="main-app">
-  <style>
-    :host {
-      display: block;
-      --primary-color: var(--paper-yellow-500);
-      --light-primary-color: var(--paper-yellow-300);
-    }
+    <style>
+        :host {
+            display: block;
+            --primary-color: var(--paper-yellow-500);
+            --light-primary-color: var(--paper-yellow-300);
+        }
 
+        app-toolbar {
+            background-color: var(--primary-color);
+            color: var(--primary-text-color: );
+            font: var(--paper-font-display1);
+        }
 
-    app-toolbar {
-      background-color: var(--primary-color);
-      color: var(--primary-text-color:);
-      font: var(--paper-font-display1);
-    }
-    app-drawer {
-      --app-drawer-width: 250px;
-      --app-drawer-content-container: {
-        background-color: var(--divider-color);/* #B0BEC5;*/
-      }
-    }
+        app-drawer {
+            --app-drawer-width: 250px;
+            --app-drawer-content-container: {
+                background-color: var(--divider-color);
+                /* #B0BEC5;*/
+            }
+        }
 
-    paper-tabs{
-        background-color: var(--light-primary-color);
-        color: var(--primary-text-color);
-        --paper-tabs-selection-bar-color: var(--primary-text-color);
-        /*font: var(--paper-font-display1);*/
-    }
+        paper-tabs {
+            background-color: var(--light-primary-color);
+            color: var(--primary-text-color);
+            --paper-tabs-selection-bar-color: var(--primary-text-color);
+            /*font: var(--paper-font-display1);*/
+        }
 
-    paper-progress {
-      --paper-progress-transition-duration: 0.08s;
-      --paper-progress-transition-timing-function: ease;
-      --paper-progress-transition-transition-delay: 0s;
-    }
+        paper-progress {
+            --paper-progress-transition-duration: 0.08s;
+            --paper-progress-transition-timing-function: ease;
+            --paper-progress-transition-transition-delay: 0s;
+        }
 
-    paper-input{
-      padding: 0px 25px 0px 25px;
-    }
-
-    /*app-header {
+        paper-input {
+            padding: 0px 25px 0px 25px;
+        }
+        /*app-header {
         position: fixed;
         top: 0;
         left: 0;
@@ -54,131 +54,123 @@
         };
       }*/
 
-      .page{
-          margin: 20px;
-      }
+        .page {
+            margin: 20px;
+        }
 
-      .fab-button{
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-      }
+        .fab-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+        }
+    </style>
 
-  </style>
+    <template>
+        <app-drawer-layout force-narrow>
+            <app-drawer id="bla">
+                drawer-content
+            </app-drawer>
+            <app-header-layout>
+                <app-header fixed>
+                    <app-toolbar>
+                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+                        <div title>Mobile Tolling Admin</div>
+                        <paper-icon-button icon="search" on-tap="toggleSearch"></paper-icon-button>
+                        <paper-input id="search" type="search" value="{{search}}" hidden$={{searchTextHidden}} no-label-float></paper-input>
+                    </app-toolbar>
+                    <paper-tabs selected="{{selected}}">
+                        <paper-tab>DEVICES</paper-tab>
+                        <paper-tab>APP SETTINGS</paper-tab>
+                        <paper-tab>ROAD FEATURE SETTINGS</paper-tab>
+                    </paper-tabs>
+                </app-header>
 
-  <template>
-      <app-drawer-layout force-narrow >
-        <app-drawer id="bla" >
-          drawer-content
-        </app-drawer>
-        <app-header-layout>
-          <app-header fixed>
-            <app-toolbar>
-              <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-              <div title>Mobile Tolling Admin</div>
-                  <paper-icon-button icon="search" on-tap="toggleSearch"></paper-icon-button>
-                  <paper-input id="search" type="search"  value="{{search}}" hidden$={{searchTextHidden}} no-label-float></paper-input>
-              </app-toolbar>
-            <paper-tabs selected="{{selected}}" >
-                <paper-tab>DEVICES</paper-tab>
-                <paper-tab>APP SETTINGS</paper-tab>
-                <paper-tab>ROAD FEATURE SETTINGS</paper-tab>
-            </paper-tabs>
-          </app-header>
-
-          <iron-pages selected="{{selected}}">
-              <div class="page">
-                  <device-list id="devicelist" filter="{{search}}"></device-list>
-                  <paper-fab class="fab-button" icon="add" on-tap="showAddDeviceDialog"></paper-fab>
-                  <paper-dialog id="AddDeviceDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-                    <h2>Add a device</h2>
-                    <paper-dialog-scrollable>
-                      <form is="iron-form" method="post"
-                                           action="http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices"
-                                           headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
-                                           on-iron-form-response="onDeviceResponseReceived"
-                                           id="deviceform"
-                                           content-type="application/json">
-                        <paper-input name="deviceId" label="Device ID" required></paper-input>
-                        <br>
-                        <paper-input name="description" label="Description" required></paper-input><br>
-                        <paper-input name="type" value="SMARTPHONE" hidden></paper-input><br>
-                        <!-- <paper-button raised onclick="_submit(event)">Submit</paper-button>
+                <iron-pages selected="{{selected}}">
+                    <div class="page">
+                        <device-list id="devicelist" filter="{{search}}"></device-list>
+                        <paper-fab class="fab-button" icon="add" on-tap="showAddDeviceDialog"></paper-fab>
+                        <paper-dialog id="AddDeviceDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+                            <h2>Add a device</h2>
+                            <paper-dialog-scrollable>
+                                <form is="iron-form" method="post" action="http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' on-iron-form-response="onDeviceResponseReceived" id="deviceform" content-type="application/json">
+                                    <paper-input name="deviceId" label="Device ID" required></paper-input>
+                                    <br>
+                                    <paper-input name="description" label="Description" required></paper-input>
+                                    <br>
+                                    <paper-input name="type" value="SMARTPHONE" hidden></paper-input>
+                                    <br>
+                                    <!-- <paper-button raised onclick="_submit(event)">Submit</paper-button>
                         <paper-button raised onclick="_reset(event)">Reset</paper-button> -->
-                        <div class="output"></div>
-                      </form>
-                    </paper-dialog-scrollable>
-                    <div class="buttons">
-                      <paper-button raised dialog-dismiss>CANCEL</paper-button>
-                      <paper-button raised on-tap="addDevice">ADD DEVICE</paper-button>
+                                    <div class="output"></div>
+                                </form>
+                            </paper-dialog-scrollable>
+                            <div class="buttons">
+                                <paper-button raised dialog-dismiss>CANCEL</paper-button>
+                                <paper-button raised on-tap="addDevice">ADD DEVICE</paper-button>
+                            </div>
+                        </paper-dialog>
+
                     </div>
-                  </paper-dialog>
+                    <div>
+                        <div class="page">
+                            <appsettings-list></appsettings-list>
+                            <h2>Upload App Settings File</h2>
+                            <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
+                            <paper-dialog id="AddAppsettingsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+                              <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
+                              <file-upload url="http://localhost:8088/fileupload/" upload-progress="{{uploadProgress}}" error="{{error}}" files="{{files}}">
+                              </file-upload>
+                              <template is="dom-repeat" items="[[files]]" id="files">
+                                  <div>File Name: [[item.fileName]]</div>
+                                  <div>File Size: [[item.fileSize]]</div>
+                                  <div>File Type: [[item.fileType]]</div>
+                                  <div>File content: [[item.content]]</div>
+                                  <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress>
+                                  <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
+                                  <div>File Error: [[item.error]]</div>
+                              </template>
 
-              </div>
-              <div>Page 2
-                 Upload Progress
-                 <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
-                 <file-upload url="http://localhost:8088/fileupload/"
-                              content="{{content}}"
-                              upload-progress="{{uploadProgress}}"
-                              error="{{error}}"
-                              files="{{files}}">
-                 </file-upload>
-
-                 <template is="dom-repeat" items="[[files]]" id="files">
-                     <div>File Name: [[item.fileName]]</div>
-                     <div>File Size: [[item.fileSize]]</div>
-                     <div>File Type: [[item.fileType]]</div>
-                     <div>File content: [[item.content]]</div>
-                     <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress>
-                     <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
-                     <div>File Error: [[item.error]]</div>
-                 </template>
-
-                 <div>Error: {{error}}</div>
-                 <div>Overall Progress: <paper-progress class="transiting" value="{{uploadProgress}}"></paper-progress></div>
-
-                 <!-- <features-map road-features="{{content.features}}"></features-map> -->
-               </br>
-             </br>
-                 <strong>FULL content: {{content}}</strong>
-              </div>
-              <div>Page 3
-
-                main content
-                 <paper-input id="pinput" label="Type something..." value="{{text}}"></paper-input>
-                 <p>
-                   Text: <span>{{text}}</span><br />
-                   Reversed: <span>{{reverseText(text)}}</span>
-                 </p>
-                 <p>
-                   Text: <span>{{text}}</span><br />
-                   Reversed: <span>{{reverseText(text)}}</span>
-                 </p>
-                 <p>
-                   Text: <span>{{text}}</span><br />
-                   Reversed: <span>{{reverseText(text)}}</span>
-                 </p>
-                 <p>
-                   Text: <span>{{text}}</span><br />
-                   Reversed: <span>{{reverseText(text)}}</span>
-                 </p>
-                 <p>
-                   Text: <span>{{text}}</span><br />
-                   Reversed: <span>{{reverseText(text)}}</span>
-                 </p>
-                 <p>
-                   Text: <span>{{text}}</span><br />
-                   Reversed: <span>{{reverseText(text)}}</span>
-                 </p>
-               </div>
-          </iron-pages>
+                              <div>Error: {{error}}</div>
+                              <div>Overall Progress:
+                                  <paper-progress class="transiting" value="{{uploadProgress}}"></paper-progress>
+                              </div>
+                            </paper-dialog>
+                        </div>
+                    </div>
+                    <div>Page 3 main content
+                        <paper-input id="pinput" label="Type something..." value="{{text}}"></paper-input>
+                        <p>
+                            Text: <span>{{text}}</span>
+                            <br /> Reversed: <span>{{reverseText(text)}}</span>
+                        </p>
+                        <p>
+                            Text: <span>{{text}}</span>
+                            <br /> Reversed: <span>{{reverseText(text)}}</span>
+                        </p>
+                        <p>
+                            Text: <span>{{text}}</span>
+                            <br /> Reversed: <span>{{reverseText(text)}}</span>
+                        </p>
+                        <p>
+                            Text: <span>{{text}}</span>
+                            <br /> Reversed: <span>{{reverseText(text)}}</span>
+                        </p>
+                        <p>
+                            Text: <span>{{text}}</span>
+                            <br /> Reversed: <span>{{reverseText(text)}}</span>
+                        </p>
+                        <p>
+                            Text: <span>{{text}}</span>
+                            <br /> Reversed: <span>{{reverseText(text)}}</span>
+                        </p>
+                    </div>
+                </iron-pages>
 
 
-        </template>
+    </template>
 
-        </app-header-layout>
-      </app-drawer-layout>
+    </app-header-layout>
+    </app-drawer-layout>
 
 
 </dom-module>
