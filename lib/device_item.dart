@@ -23,6 +23,7 @@ import 'package:polymer/polymer.dart';
 import 'package:polymer_elements/iron_collapse.dart';
 
 import 'package:web_components/web_components.dart';
+import 'features_map.dart';
 
 //import 'package:polymer_elements/iron_flex_layout.dart'; // to allow flexbox styling
 
@@ -39,6 +40,9 @@ class DeviceItem extends PolymerElement {
   @property
   String appsettingscontent;
 
+  @property
+  Map appsettings;
+
   /// Constructor used to create instance of MainApp.
   DeviceItem.created() : super.created();
 
@@ -54,13 +58,29 @@ class DeviceItem extends PolymerElement {
 
   //called when a app settings response is received
   @reflectable
-  void processSettingsResponse(_, __) {
+  processSettingsResponse(_, __) async {
 
     //if i process it as text
     String content = settingsRequest.lastResponse;
 
-    set('appsettingscontent', UTF8.decode(BASE64.decode(content), allowMalformed: true));
+    //set('appsettingscontent', UTF8.decode(BASE64.decode(content), allowMalformed: true));
 
+    final blob = new Blob([content], 'text/plain');
+    final form = new FormData()
+        //..append('field1', 'hello')
+        ..appendBlob('appConfig', blob, 'appsettings.b64');
+
+    final response = await HttpRequest.request(
+          'http://localhost:4242/appconfigapi/v1/appconfig',
+          method: 'POST',
+          sendData: form);
+    final result = JSON.decode(response.responseText);
+    print (result);
+
+    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    String prettyprint = encoder.convert(result);
+    set('appsettings', result);
+    set('appsettingscontent',prettyprint);
     //Blob version - if i set iron ajax element to blob
     // Blob content = settingsRequest.lastResponse;
     // FileReader r = new FileReader();

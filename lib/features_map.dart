@@ -55,7 +55,7 @@ class FeatureMap extends PolymerElement {
       var lineCoords = new List();
       var coordinates = roadFeature['geometry']['coordinates'];
       for (var c in coordinates){
-            lineCoords.add(new LatLng(c[1], c[0]));
+            lineCoords.add(new LatLng(c['lon'], c['lat']));
       }
       print ("line Coords $lineCoords");
       var pbaFeature = new Polyline(new PolylineOptions()
@@ -64,7 +64,7 @@ class FeatureMap extends PolymerElement {
         ..strokeColor = '#FF0000'
         ..strokeOpacity = 0.8
         ..strokeWeight = 4
-        ..editable = true
+        ..editable = false
         // ..fillColor = '#FF0000'
         // ..fillOpacity = 0.35
       );
