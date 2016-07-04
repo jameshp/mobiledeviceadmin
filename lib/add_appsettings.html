@@ -1,0 +1,39 @@
+<dom-module id="add-appsettings">
+  <style>
+    :host {
+      display: block;
+    }
+
+    paper-progress {
+        --paper-progress-transition-duration: 0.08s;
+        --paper-progress-transition-timing-function: ease;
+        --paper-progress-transition-transition-delay: 0s;
+    }
+
+  </style>
+
+  <template>
+    <paper-dialog id="dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
+      <file-upload auto url="http://localhost:4242/appconfigapi/v1/json2base64" upload-progress="{{uploadProgress}}" error="{{error}}" files="{{files}}">
+      </file-upload>
+      <template is="dom-repeat" items="[[files]]" id="files">
+          <!-- <div>File Name: [[item.fileName]]</div>
+          <div>File Size: [[item.fileSize]]</div>
+          <div>File Type: [[item.fileType]]</div>
+          <div>File content: [[item.content]]</div> -->
+          <!-- <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress> -->
+          <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
+          <div>File Error: [[item.error]]</div>
+          <div>File Converted: [[item.responseContent]]</div>
+      </template>
+
+      <div>Error: {{error}}</div>
+      <div>Overall Progress:
+          <paper-progress class="transiting" value="{{uploadProgress}}"></paper-progress>
+      </div>
+    </paper-dialog>
+
+  </template>
+
+</dom-module>

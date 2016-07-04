@@ -46,6 +46,9 @@ class UploadFile extends JsProxy {
   String content;
 
   @reflectable
+  Map responseContent;
+
+  @reflectable
   int uploadProgress;
 
   @reflectable
@@ -76,6 +79,9 @@ class FileUpload extends PolymerElement {
 
   @property
   String url; //Upload URL
+
+  @property
+  bool auto = false; //automatic upload
 
   @Property(notify: true)
   int uploadProgress; //upload progress when sent to a server
@@ -143,8 +149,9 @@ class FileUpload extends PolymerElement {
     // set('content', content);
     // set('loadProgress', 100);
 
-    //TODO!!! -
-    doFileUpload(f);
+    if (auto) {
+      doFileUpload(f);
+    }
     // var thumbnail = new ImageElement(src: reader.result);
     // thumbnail.classes.add('thumb');
     // thumbnail.title = sanitizer.convert(file.name);
@@ -166,13 +173,12 @@ class FileUpload extends PolymerElement {
       var path = "files.${index}.loadProgress";
       print("path: ${path}");
       set(path, percentLoaded);
-
     }
   }
 
   //calle in case of some error  - sets the error property
   void _onError(UploadFile f, FileReader _reader) {
-    print ("ON ERROR called");
+    print("ON ERROR called");
     var index = files.indexOf(f);
     print("index: ${index}");
     var path = "files.${index}.error";
@@ -237,8 +243,8 @@ class FileUpload extends PolymerElement {
     _reader.onProgress.listen((e) => _onProgress(e, f));
     _reader.onError.listen((e) => _onError(f, _reader));
     _reader.onLoad.listen((e) => _onLoad(f, _reader));
-    //_reader.readAsText(file);
-    _reader.readAsDataUrl(f.file);
+    _reader.readAsText(f.file);
+    //_reader.readAsDataUrl(f.file);
   }
 
   @Observe('files.*')
@@ -276,10 +282,11 @@ class FileUpload extends PolymerElement {
       var path = "files.${index}.uploadProgress";
       set(path, 0);
 
+      final blob = new Blob([f.content], 'text/plain');
       FormData fdata = new FormData(); // from dart:html
-      fdata.append("file", f.content);
-      fdata.append("filename", f.fileName);
-      fdata.append("filesize", f.fileSize.toString());
+      fdata.appendBlob("appConfig", blob, f.fileName);
+      fdata.append("fileName", f.fileName);
+      fdata.append("fileSize", f.fileSize.toString());
       //fdata.appendBlob("file2", data, "file2 super filename.txt"); //I thought this would set the filename... but it does not.
 
       HttpRequest req = new HttpRequest();
@@ -291,13 +298,21 @@ class FileUpload extends PolymerElement {
       req.onReadyStateChange.listen((Event e) {
         if (req.readyState == HttpRequest.DONE &&
             (req.status == 200 || req.status == 0)) {
-          set('uploadProgress', 100);
+          var  result = JSON.decode(req.responseText);
+          print (result);
+          set('files.${index}.responseContent', result);
+          set(path, 100);
+        }
+        if (req.readyState == HttpRequest.DONE &&(req.status == 500)){
+          var errorResult = JSON.decode(req.responseText);
+          var reason = errorResult['error']['errors'][0]['reason'];
+          set('files.${index}.error', reason);
         }
       });
     }
   }
 
-  void _onUploadError(ProgressEvent event, UploadFile f){
+  void _onUploadError(ProgressEvent event, UploadFile f) {
     var index = files.indexOf(f);
     var path = "files.${index}.error";
     print("error path: ${path}");

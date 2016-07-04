@@ -114,27 +114,11 @@
                     <div>
                         <div class="page">
                             <appsettings-list></appsettings-list>
-                            <h2>Upload App Settings File</h2>
-                            <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
-                            <paper-dialog id="AddAppsettingsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-                              <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
-                              <file-upload url="http://localhost:8088/fileupload/" upload-progress="{{uploadProgress}}" error="{{error}}" files="{{files}}">
-                              </file-upload>
-                              <template is="dom-repeat" items="[[files]]" id="files">
-                                  <div>File Name: [[item.fileName]]</div>
-                                  <div>File Size: [[item.fileSize]]</div>
-                                  <div>File Type: [[item.fileType]]</div>
-                                  <div>File content: [[item.content]]</div>
-                                  <paper-progress class="transiting" value="{{item.loadProgress}}"></paper-progress>
-                                  <paper-progress class="transiting" value="{{item.uploadProgress}}"></paper-progress>
-                                  <div>File Error: [[item.error]]</div>
-                              </template>
 
-                              <div>Error: {{error}}</div>
-                              <div>Overall Progress:
-                                  <paper-progress class="transiting" value="{{uploadProgress}}"></paper-progress>
-                              </div>
-                            </paper-dialog>
+                            <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
+                            <add-appsettings id="AddAppsettings"></add-appsettings>
+
+
                         </div>
                     </div>
                     <div>Page 3 main content

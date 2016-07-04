@@ -46,8 +46,9 @@ import 'package:polymer_elements/default_theme.dart';
 //own custom elements imports
 import 'package:mobiledeviceadmin/device_list.dart';
 import 'package:mobiledeviceadmin/appsettings_list.dart';
-import 'package:mobiledeviceadmin/file_upload.dart';
+
 import 'package:mobiledeviceadmin/features_map.dart';
+import 'package:mobiledeviceadmin/add_appsettings.dart';
 
 /// Uses [PaperInput]
 @PolymerRegister('main-app')
@@ -103,8 +104,8 @@ class MainApp extends PolymerElement {
 
   @reflectable
   showAddAppsettingsDialog(_,__){
-    PaperDialog d = this.$$('#AddAppsettingsDialog');
-    d.open();
+    AddAppsettings addAppSettings = this.$$('#AddAppsettings');
+    addAppSettings.dialog.open();
   }
 
   // @reflectable
