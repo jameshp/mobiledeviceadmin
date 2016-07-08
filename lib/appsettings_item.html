@@ -24,6 +24,29 @@
           <iron-icon icon="settings-applications" item-icon>   </iron-icon>
           App Settings Version: [[data.version]]
           <div>State: [[data.state]] </div>
+          <!-- <div hidden$="{{isReleased(data.state)}}">
+            <paper-button>Release App Settings</paper-button>
+          </div> -->
+          <div hidden$="{{released}}">
+            <paper-button raised on-tap="releaseAppSettings"> Release APP Settings </paper-button>
+            <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
+          </div>
+          <iron-ajax id="ReleaseRequest" loading={{loading}} verbose method="PUT" url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings/{{data.id}}/"
+          headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" last-response="{{releaseResponse}}" on-response="handleResponse">
+          </iron-ajax>
+          <paper-toast id="toast" text="bla bla bla"></paper-toast>
+<!--
+          <div class="BindToDevice">
+            <paper-button raised on-tap="showBindingDialog"></paper-button>
+            <paper-dropdown-menu label="Your favourite pastry">
+              <paper-listbox class="dropdown-content">
+                <paper-item>Croissant</paper-item>
+                <paper-item>Donut</paper-item>
+                <paper-item>Financier</paper-item>
+                <paper-item>Madeleine</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu> -->
+          <div>
         </div>
       </paper-item-body>
     </paper-icon-item>

@@ -10,6 +10,11 @@
         .appsettingscontent{
           white-space: pre;
         }
+
+        paper-button {
+            margin-bottom: 5px;
+        }
+
     </style>
 
     <template>
@@ -30,14 +35,13 @@
                     <iron-collapse id="AppSettingsCollapse">
                         <iron-ajax id="SettingsRequest" verbose url="[[settingsResponse.url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="text" on-response="processSettingsResponse" last-response="{{rawAppSettings}}">
                         </iron-ajax>
-                        <div>App Settings Content: [[rawAppSettings]] </div>
-                        <div>Data: [[appsettings.appConfigJson.appConfig.virtualGantryDetectionConfig.positionIntervalSec]]</div>
-                        <div>[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.roadFeature.version]]</div>
+                        <!-- <div>App Settings Content: [[rawAppSettings]] </div> -->
+                        <!-- <div>Data: [[appsettings.appConfigJson.appConfig.virtualGantryDetectionConfig.positionIntervalSec]]</div>
+                        <div>[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.roadFeature.version]]</div> -->
                         <features-map road-features=[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.features]] ></features-map>
                         <div>JSON file:
                           <span class="appsettingscontent"> [[appsettingscontent]] </span>
                         </div>
-
                     </iron-collapse>
                 </div>
 

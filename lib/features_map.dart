@@ -35,6 +35,7 @@ import 'package:web_components/web_components.dart';
 class FeatureMap extends PolymerElement {
 
   GMap map;
+  var bounds = new LatLngBounds();
 
   @Property(notify: true, observer: 'roadFeaturesChanged')
   List roadFeatures;
@@ -48,28 +49,33 @@ class FeatureMap extends PolymerElement {
           drawPolyLine(f);
       }
       //roadFeatures.forEach( (f) => drawPolyLine(f) );
-
+      map.fitBounds(bounds);
   }
 
   drawPolyLine(Map roadFeature){
       var lineCoords = new List();
       var coordinates = roadFeature['geometry']['coordinates'];
+
       for (var c in coordinates){
-            lineCoords.add(new LatLng(c['lon'], c['lat']));
+            var point = new LatLng(c['lat'], c['lon']);
+            lineCoords.add(point);
+            bounds.extend(point);
       }
+
       print ("line Coords $lineCoords");
       var pbaFeature = new Polyline(new PolylineOptions()
         ..path = lineCoords
         ..geodesic = true
-        ..strokeColor = '#FF0000'
+        ..strokeColor = '#33CC66'
         ..strokeOpacity = 0.8
-        ..strokeWeight = 4
+        ..strokeWeight = 5
         ..editable = false
         // ..fillColor = '#FF0000'
         // ..fillOpacity = 0.35
       );
       pbaFeature.map = map;
       print("polygon drawn");
+
   }
 
 
