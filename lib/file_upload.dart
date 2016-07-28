@@ -15,13 +15,6 @@ import 'package:polymer_elements/paper_button.dart';
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 
-//app layout imports
-import 'package:polymer_app_layout/app_drawer_layout.dart';
-import 'package:polymer_app_layout/app_drawer.dart';
-import 'package:polymer_app_layout/app_header_layout.dart';
-import 'package:polymer_app_layout/app_header.dart';
-import 'package:polymer_app_layout/app_toolbar.dart';
-import 'package:polymer_app_layout/app_scroll_effects.dart';
 
 //style imports
 import 'package:polymer_elements/color.dart';

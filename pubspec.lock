@@ -12,13 +12,13 @@ packages:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.4+2"
+    version: "0.13.5"
   async:
     description:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   barback:
     description:
       name: barback
@@ -54,13 +54,20 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.0"
   csslib:
     description:
       name: csslib
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.13.2"
+  custom_elements:
+    description:
+      ref: HEAD
+      resolved-ref: "4edabb2022d0130eb414f8700a1b3daab1acba61"
+      url: "git://github.com/dam0vm3nt/custom_elements.git"
+    source: git
+    version: "0.0.8+4"
   dart_style:
     description:
       name: dart_style
@@ -72,7 +79,7 @@ packages:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.2"
+    version: "1.1.3"
   google_maps:
     description:
       name: google_maps
@@ -102,7 +109,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.3"
+    version: "0.11.3+1"
   package_config:
     description:
       name: package_config
@@ -126,25 +133,19 @@ packages:
       name: polymer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-rc.17"
-  polymer_app_layout:
-    description:
-      name: polymer_app_layout
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.5"
+    version: "1.0.0-rc.18"
   polymer_elements:
     description:
       name: polymer_elements
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-rc.8"
+    version: "1.0.0-rc.9"
   polymer_interop:
     description:
       name: polymer_interop
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-rc.9"
+    version: "1.0.0-rc.10"
   pool:
     description:
       name: pool
@@ -180,7 +181,7 @@ packages:
       name: string_scanner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.5"
+    version: "1.0.0"
   utf:
     description:
       name: utf
@@ -216,5 +217,5 @@ packages:
       name: yaml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.9"
+    version: "2.1.10"
 sdk: ">=1.14.0 <2.0.0"

@@ -22,18 +22,49 @@
           timeout="10000"
           url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
           handle-as="json" loading="{{loading}}" on-error="handleRequestError"
-          last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
+          last-response="{{appSettingsList}}" last-error="{{ajaxError}}">
     </iron-ajax>
-     <div class="horizontal-section">
+     <!-- <div class="horizontal-section">
       <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
       <div>{{ajaxError}}</div>
       <div>{{error}}</div>
       <paper-material elevation="1">
-      <template is="dom-repeat" items="[[ajaxResponse]]" id="appsettingsList" filter="filterItems">
+      <template is="dom-repeat" items="[[ajaxResponse]]" id="appsettingsList"> <!filter="filterItems">
           <appsettings-item data=[[item]]></device-item>
       </template>
     </paper-material>
+    </div> -->
+
+    <div class="horizontal-section">
+        <paper-material elevation="1">
+            <iron-data-table items="[[appSettingsList]]">
+                <data-table-column name="Type" width="50px" flex="0">
+                    <template>
+                        <iron-icon icon="hardware:smartphone" item-icon></iron-icon>
+                        <template>
+                </data-table-column>
+                <data-table-column name="Internal ID" filter-by="id" sort-by="id">
+                    <template>[[item.id]]</template>
+                </data-table-column>
+                <data-table-column name="Description">
+                    <template>[[item.description]]</template>
+                </data-table-column>
+                <data-table-column name="App Settings Version" filter-by="appsettingsVersion">
+                    <template>[[item.version]]
+
+                        <!-- <paper-button hidden="[[item.appsettingsVersion]]" data-id$="[[item.deviceId]]" raised on-tap="showAppSettingsDetails">Show</paper-button> -->
+                    </template>
+                </data-table-column>
+                <data-table-column name="State" filter-by="state">
+                    <template>
+                        [[item.state]]
+                        <paper-button hidden="[[item.version]]" data-id$="[[item.id]]" raised on-tap="releaseAppSettings">Release</paper-button>
+                    </template>
+                </data-table-column>
+            </iron-data-table>
+        </paper-material>
     </div>
+
 
   </template>
 </dom-module>

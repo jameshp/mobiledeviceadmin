@@ -7,7 +7,8 @@
     <style>
         :host {
             display: block;
-            --primary-color: #FFCC00; /*var(--paper-yellow-500);*/
+            --primary-color: #FFCC00;
+            /*var(--paper-yellow-500);*/
             --light-primary-color: var(--paper-yellow-300);
         }
 
@@ -41,18 +42,6 @@
         paper-input {
             padding: 0px 25px 0px 25px;
         }
-        /*app-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        /*height: 132px;*/
-        /*color: #fff;
-        background-color: #4285f4;
-        --app-header-background-rear-layer: {
-          background-color: #0b8043;
-        };
-      }*/
 
         .page {
             margin: 20px;
@@ -66,12 +55,14 @@
     </style>
 
     <template>
-        <app-drawer-layout force-narrow>
+        <app-drawer-layout force-narrow fullbleed>
             <app-drawer id="bla">
                 drawer-content
             </app-drawer>
             <app-header-layout>
+
                 <app-header fixed>
+
                     <app-toolbar>
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         <div title>Mobile Tolling Admin</div>
@@ -83,11 +74,14 @@
                         <paper-tab>APP SETTINGS</paper-tab>
                         <paper-tab>ROAD FEATURE SETTINGS</paper-tab>
                     </paper-tabs>
+
                 </app-header>
 
                 <iron-pages selected="{{selected}}">
                     <div class="page">
-                        <device-list id="devicelist" filter="{{search}}"></device-list>
+                        <appsettings-detail id="devicedetail" device="[[selecteddevice]]"></appsettings-detail>
+                        <device-list id="devicelist" filter="{{search}}" device={{selecteddevice}}></device-list>
+
                         <paper-fab class="fab-button" icon="add" on-tap="showAddDeviceDialog"></paper-fab>
                         <paper-dialog id="AddDeviceDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
                             <h2>Add a device</h2>
@@ -100,7 +94,7 @@
                                     <paper-input name="type" value="SMARTPHONE" hidden></paper-input>
                                     <br>
                                     <!-- <paper-button raised onclick="_submit(event)">Submit</paper-button>
-                        <paper-button raised onclick="_reset(event)">Reset</paper-button> -->
+                                    <paper-button raised onclick="_reset(event)">Reset</paper-button> -->
                                     <div class="output"></div>
                                 </form>
                             </paper-dialog-scrollable>
@@ -117,8 +111,6 @@
 
                             <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
                             <add-appsettings id="AddAppsettings"></add-appsettings>
-
-
                         </div>
                     </div>
                     <div>Page 3 main content
@@ -127,34 +119,14 @@
                             Text: <span>{{text}}</span>
                             <br /> Reversed: <span>{{reverseText(text)}}</span>
                         </p>
-                        <p>
-                            Text: <span>{{text}}</span>
-                            <br /> Reversed: <span>{{reverseText(text)}}</span>
-                        </p>
-                        <p>
-                            Text: <span>{{text}}</span>
-                            <br /> Reversed: <span>{{reverseText(text)}}</span>
-                        </p>
-                        <p>
-                            Text: <span>{{text}}</span>
-                            <br /> Reversed: <span>{{reverseText(text)}}</span>
-                        </p>
-                        <p>
-                            Text: <span>{{text}}</span>
-                            <br /> Reversed: <span>{{reverseText(text)}}</span>
-                        </p>
-                        <p>
-                            Text: <span>{{text}}</span>
-                            <br /> Reversed: <span>{{reverseText(text)}}</span>
-                        </p>
                     </div>
                 </iron-pages>
 
-
+            </app-header-layout>
+        </app-drawer-layout>
     </template>
 
-    </app-header-layout>
-    </app-drawer-layout>
+
 
 
 </dom-module>

@@ -5,41 +5,90 @@
 <!-- <link rel="import" href="../iron-icons/maps-icons.html"> -->
 
 <dom-module id="device-list">
-  <style>
-    :host {
-      display: block;
-    }
-    paper-card {
-      margin: 5px;
-    }
+    <style>
+        :host {
+            display: block;
+            height: 800px;
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
 
-    .horizontal-section{
-      /*padding: 25px;*/
-    }
+        iron-data-table{
+          height: 800px; /*otherwise default height of 400 is used*/
+        }
 
-  </style>
+        paper-card {
+            margin: 5px;
+        }
 
-  <template>
+        .horizontal-section {
+            /*@apply(--layout-vertical)*/
+            /*height: 800 px; */
+            /*padding: 25px;*/
+        }
+    </style>
 
-    <paper-input hidden label="URL" value="{{url}}"></paper-input>
-    <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
+    <template>
 
-    <iron-ajax id="deviceRequest" auto verbose
-          timeout="10000"
-          url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
-          handle-as="json" loading="{{loading}}" on-error="handleRequestError"
-          last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
-    </iron-ajax>
-     <div class="horizontal-section">
-      <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
-      <div>{{ajaxError}}</div>
-      <div>{{error}}</div>
-      <paper-material elevation="1">
-      <template is="dom-repeat" items="[[ajaxResponse]]" id="deviceList" filter="filterItems">
-          <device-item data=[[item]]></device-item>
-      </template>
-    </paper-material>
-    </div>
+        <paper-input hidden label="URL" value="{{url}}"></paper-input>
+        <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
 
-  </template>
+        <iron-ajax id="deviceRequest" auto verbose timeout="10000" url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
+        </iron-ajax>
+
+        <!-- <div class="horizontal-section">
+            <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
+            <div>{{ajaxError}}</div>
+            <div>{{error}}</div>
+            <paper-material elevation="1">
+                <template is="dom-repeat" items="[[ajaxResponse]]" id="deviceList" filter="filterItems">
+                    <device-item data=[[item]]></device-item>
+                </template>
+            </paper-material>
+        </div> -->
+
+        <div class="horizontal-section">
+            <paper-material elevation="1">
+                <iron-data-table items="[[devicelist]]">
+                    <data-table-column name="Type" width="50px" flex="0">
+                        <template>
+                            <iron-icon icon="hardware:smartphone" item-icon></iron-icon>
+                            <template>
+                    </data-table-column>
+                    <data-table-column name="Public ID" filter-by="deviceId" sort-by="deviceId">
+                        <template>[[item.deviceId]]</template>
+                    </data-table-column>
+                    <data-table-column name="Device ID">
+                        <template>[[item.id]]</template>
+                    </data-table-column>
+                    <data-table-column name="Description">
+                        <template>[[item.description]]</template>
+                    </data-table-column>
+                    <data-table-column name="App Settings Version" filter-by="appsettingsVersion">
+                        <template>
+                            <!-- <iron-ajax auto verbose url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices/{{item.deviceId}}/appsettings/LATEST" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" last-response="{{detail}}">
+                            </iron-ajax> -->
+                            [[item.appsettingsVersion]]
+                            <!--[[detail.url]]-->
+
+                            <paper-button hidden="[[!item.appsettingsVersion]]" data-id$="[[item.deviceId]]" raised on-tap="showAppSettingsDetails">Show</paper-button>
+                        </template>
+                    </data-table-column>
+                    <data-table-column name="Road Features Version" filter-by="roadFeaturesVersion">
+                        <template>
+                            <!-- <iron-ajax auto verbose url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices/{{item.deviceId}}/roadfeatures/LATEST" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" last-response="{{roadFeatures}}">
+                            </iron-ajax> -->
+
+                            [[item.roadFeaturesVersion]]
+                            <!-- [[roadFeatures.url]] -->
+                            <paper-button hidden="[[!item.roadFeaturesVersion]]" raised>Show</paper-button>
+                        </template>
+                    </data-table-column>
+                </iron-data-table>
+            </paper-material>
+        </div>
+
+        </template>
 </dom-module>

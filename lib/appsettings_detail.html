@@ -1,0 +1,63 @@
+<dom-module id="appsettings-detail">
+    <style>
+        :host {
+            display: block;
+        }
+
+        paper-icon-item {
+            padding: 8px 16px 8px 16px;
+        }
+
+        .appsettingscontent{
+          white-space: pre;
+        }
+
+        paper-dialog-scrollable{
+          /*height: 300px; */   /*to limit overlap error on top --but did not work*/
+        }
+    </style>
+
+    <template>
+        <paper-material elevation="1">
+        <paper-icon-item>
+            <iron-icon icon="settings-applications" item-icon>
+            </iron-icon>
+            <paper-item-body three-line>
+                <div>Selected Device: [[device.deviceId]] </div>
+                <div>Description: [[device.description]]</div>
+                <div>App Settings Version: [[device.appsettingsVersion]]</div>
+                <div>URL: <a href="[[device.appsettingsUrl]]">[[device.appsettingsUrl]]</a> </div>
+                <div>
+                  <paper-button on-tap="showFileContentDialog">Show File <paper-button>
+                </div>
+                <iron-ajax id="settingsRequest" auto verbose url="[[device.appsettingsUrl]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="text" on-response="processSettingsResponse" last-response="{{rawAppSettings}}">
+                </iron-ajax>
+                <!-- <div>App Settings Content: [[rawAppSettings]] </div> -->
+                <!-- <div>Data: [[appsettings.appConfigJson.appConfig.virtualGantryDetectionConfig.positionIntervalSec]]</div>
+                <div>[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.roadFeature.version]]</div> -->
+
+                <!--MAP VIEW -->
+            </paper-item-body>
+        </paper-icon-item>
+
+          <features-map road-features=[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.features]] ></features-map>
+
+        </paper-material>
+
+        <paper-dialog id="FileContentDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <h2>APP CONFIG FILE</h2>
+            <paper-dialog-scrollable>
+                <div>
+                <span class="appsettingscontent"> [[appsettingscontent]] </span>
+              </div>
+            </paper-dialog-scrollable>
+            <div class="buttons">
+                <paper-button raised on-tap="downloadJsonFile">  <iron-icon icon="file-download"></iron-icon> Download</paper-button>
+                <paper-button raised dialog-dismiss>OK</paper-button>
+
+            </div>
+        </paper-dialog>
+
+    </template>
+
+</dom-module>

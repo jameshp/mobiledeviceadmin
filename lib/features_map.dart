@@ -35,18 +35,22 @@ import 'package:web_components/web_components.dart';
 class FeatureMap extends PolymerElement {
 
   GMap map;
-  var bounds = new LatLngBounds();
+  List<Polyline> lines = [];
+  List<Marker> markers =[];
+  LatLngBounds bounds;
 
   @Property(notify: true, observer: 'roadFeaturesChanged')
   List roadFeatures;
-  //
-  // @property
-  // GoogleMap _fmap;
+
+
   @reflectable
   void roadFeaturesChanged(newValue, oldValue){
+      cleanMap();
       print ("New Road Features: $roadFeatures");
+      bounds = new LatLngBounds();
       for (Map f in roadFeatures){
           drawPolyLine(f);
+          drawMarker(f);
       }
       //roadFeatures.forEach( (f) => drawPolyLine(f) );
       map.fitBounds(bounds);
@@ -74,10 +78,62 @@ class FeatureMap extends PolymerElement {
         // ..fillOpacity = 0.35
       );
       pbaFeature.map = map;
+      lines.add(pbaFeature);
+
       print("polygon drawn");
+  }
+
+  drawMarker(Map roadFeature){
+      print ("draw marker $roadFeature");
+      int triggerIndex = roadFeature['properties']['triggerIndex'];
+      String name = roadFeature['properties']['name'];
+      String id = roadFeature['properties']['id'];
+      String directions = roadFeature['properties']['direction'] == 0 ? "one direction": "both directions";
+      String actions = roadFeature['properties']['actions'];
+
+      var markerCoordinates = roadFeature['geometry']['coordinates'][triggerIndex];
+      var point = new LatLng(markerCoordinates['lat'], markerCoordinates['lon']);
+
+      InfoWindow info = new InfoWindow(new InfoWindowOptions()
+      ..content = """<div>Zone Id: $id </div>
+                     <div> Name: $name </div>
+                     <div> Directions: $directions</div>
+                     <div> Actions: $actions</div>"""
+      );
+
+      Marker m = new Marker(new MarkerOptions()
+      ..position = point
+      ..map = map
+      ..title = name
+      );
+      m.onClick.listen((e){
+        info.open(map,m);
+      });
+      //m.addListener('click', () => info.open(map,m));
+
+      markers.add(m);
+
 
   }
 
+  void clearLines(){
+    for (Polyline l in lines){
+      l.map = null;
+    }
+  }
+
+  void clearMarkers(){
+    for (Marker m in markers){
+      m.map = null;
+    }
+  }
+
+  void cleanMap(){
+    clearLines();
+    clearMarkers();
+    lines = [];
+    markers = [];
+  }
 
 
   /// Constructor used to create instance of MainApp.

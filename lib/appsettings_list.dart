@@ -5,6 +5,7 @@ library mobiledeviceadmin.lib.appsettings_list;
 
 import 'dart:html';
 import 'dart:core';
+import 'dart:async';
 
 import 'package:polymer_elements/paper_input.dart';
 import 'package:polymer_elements/paper_card.dart';
@@ -20,78 +21,105 @@ import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 
 import 'package:mobiledeviceadmin/appsettings_item.dart';
+import 'package:custom_elements/iron_data_table.dart';
 
 /// Uses [PaperInput]
 @PolymerRegister('appsettings-list')
 class AppsettingsList extends PolymerElement {
-
   IronAjax _appsettingsRequest;
 
   @property
-  String url = "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings";
+  String url =
+      "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings";
 
   @Property(observer: 'ajaxErrorChanged')
   Object ajaxError;
 
   @property
-  String error ="";
+  String error = "";
 
   @reflectable
-  void ajaxErrorChanged(newValue, oldValue){
-    print ("AjaxError_new: ${newValue}  + ${oldValue}");
+  void ajaxErrorChanged(newValue, oldValue) {
+    print("AjaxError_new: ${newValue}  + ${oldValue}");
     set('error', _appsettingsRequest.lastError);
-    print ("Ajax Error2 : ${_appsettingsRequest.lastError}");
+    print("Ajax Error2 : ${_appsettingsRequest.lastError}");
   }
 
   @reflectable
-  void handleRequestError(event,target){
+  void handleRequestError(event, target) {
     print("handle Error $event - $target");
+  }
+
+  @reflectable
+  releaseAppSettings(Event event, var target) {
+    print("show App settings details $event - $target");
+    String appSettingsId = (event.currentTarget as PaperButton).dataset['id'];
+    print("appsettings id $appSettingsId");
+    PaperButton b = event.currentTarget;
+    if (releaseRequest(appSettingsId) == true) {
+      b.disabled;
+      b.text = "Released :)";
+    } else {
+      b.text = "Oops...Retry";
+    }
+  }
+
+  bool releaseRequest(String appSettingsId) {
+    HttpRequest.request(url + '/' + appSettingsId,
+        method: 'PUT',
+        requestHeaders: {
+          "Authorization": "Basic dXNlcjE6cGFzc3dvcmQ="
+        }).then((roadFeatureRequest) {
+          if (roadFeatureRequest.status == 200) {
+            return true;
+          }
+          else {
+            return false;
+      }
+    });
   }
   // @property
   // String headers = '{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}';
 
   //'{"Origin" : "http://equipmentmanager.service.sitstlproxy.gpsllab.local"}';
 
-  @Property(notify: true, observer: 'filterChanged', reflectToAttribute: true)
-  String filter;
-
+  // @Property(notify: true, observer: 'filterChanged', reflectToAttribute: true)
+  // String filter;
+  //
+  //
+  // @reflectable
+  // filterChanged(newValue,oldValue){
+  //      print ("Search Filter changed from {$oldValue} to {$newValue}");
+  //      ($$('#appsettingsList')as DomRepeat).render(); //call on each change of the filter attribute in oder that filterItems is executed
+  // }
+  //
+  // @reflectable
+  // filterItems(item){
+  //   print ("filter items for:  {$item}");
+  //   if (filter == ""){
+  //     return true;
+  //   }
+  //   else if (filter == null){
+  //     return true;
+  //   }
+  //   else {
+  //     String description = item['description'];
+  //     return description.contains(filter);
+  //   }
+  // }
 
   @reflectable
-  filterChanged(newValue,oldValue){
-       print ("Search Filter changed from {$oldValue} to {$newValue}");
-       ($$('#appsettingsList')as DomRepeat).render(); //call on each change of the filter attribute in oder that filterItems is executed
-  }
-
-  @reflectable
-  filterItems(item){
-    print ("filter items for:  {$item}");
-    if (filter == ""){
-      return true;
-    }
-    else if (filter == null){
-      return true;
-    }
-    else {
-      String description = item['description'];
-      return description.contains(filter);
-    }
-  }
-
-  @reflectable
-  reloadList(){
+  reloadList() {
     this._appsettingsRequest.generateRequest();
   }
-
 
   /// Constructor used to create instance of MainApp.
   AppsettingsList.created() : super.created();
 
-
-
- /// Called when main-app has been fully prepared (Shadow DOM created,
- /// property observers set up, event listeners attached).
+  /// Called when main-app has been fully prepared (Shadow DOM created,
+  /// property observers set up, event listeners attached).
   ready() {
-      _appsettingsRequest = $$('#appsettingsRequest');
-      print ("App Settings List init done");
+    _appsettingsRequest = $$('#appsettingsRequest');
+    print("App Settings List init done");
   }
 }

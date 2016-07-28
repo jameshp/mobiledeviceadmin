@@ -9,12 +9,13 @@ environment:
 
 dependencies:
   browser: ^0.10.0
-  polymer_elements: ^1.0.0-rc.8
+  polymer_elements:
   polymer: ^1.0.0-rc.15
   web_components: ^0.12.0
   analyzer: 0.27.2
-  polymer_app_layout: '0.0.5'
   google_maps: ">=2.0.0 <3.1.0"
+  custom_elements:
+    git: git://github.com/dam0vm3nt/custom_elements.git
 
 transformers:
 - polymer:

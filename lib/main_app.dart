@@ -30,12 +30,13 @@ import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
 
 //app layout imports
-import 'package:polymer_app_layout/app_drawer_layout.dart';
-import 'package:polymer_app_layout/app_drawer.dart';
-import 'package:polymer_app_layout/app_header_layout.dart';
-import 'package:polymer_app_layout/app_header.dart';
-import 'package:polymer_app_layout/app_toolbar.dart';
-import 'package:polymer_app_layout/app_scroll_effects.dart';
+//import 'package:polymer_elements/iron_flex_layout.dart';
+import 'package:polymer_elements/app_layout/app_drawer_layout/app_drawer_layout.dart';
+import 'package:polymer_elements/app_layout/app_drawer/app_drawer.dart';
+import 'package:polymer_elements/app_layout/app_header_layout/app_header_layout.dart';
+import 'package:polymer_elements/app_layout/app_header/app_header.dart';
+import 'package:polymer_elements/app_layout/app_toolbar/app_toolbar.dart';
+import 'package:polymer_elements/app_layout/app_scroll_effects/app_scroll_effects.dart';
 
 
 //style imports
@@ -49,6 +50,7 @@ import 'package:mobiledeviceadmin/appsettings_list.dart';
 
 import 'package:mobiledeviceadmin/features_map.dart';
 import 'package:mobiledeviceadmin/add_appsettings.dart';
+import 'package:mobiledeviceadmin/appsettings_detail.dart';
 
 /// Uses [PaperInput]
 @PolymerRegister('main-app')
