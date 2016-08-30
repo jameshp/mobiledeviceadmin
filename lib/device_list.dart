@@ -54,7 +54,7 @@ class DeviceList extends PolymerElement {
   @property
   String error = "";
 
-  @property
+  @Property(notify:true)
   List<Map> devicelist;
 
   @reflectable

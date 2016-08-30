@@ -1,30 +1,34 @@
 <dom-module id="appsettings-list">
-  <style>
-    :host {
-      display: block;
-    }
-    paper-card {
-      margin: 5px;
-    }
+    <style>
+        :host {
+            display: block;
+        }
 
-    .horizontal-section{
-      /*padding: 25px;*/
-    }
+        paper-card {
+            margin: 5px;
+        }
 
-  </style>
+        iron-data-table{
+          height: 800px; /*otherwise default height of 400 is used*/
+        }
 
-  <template>
+        .horizontal-section {
+            /*padding: 25px;*/
+        }
 
-    <paper-input hidden label="URL" value="{{url}}"></paper-input>
-    <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
+        .error{
+          color: red;
+        }
+    </style>
 
-    <iron-ajax id="appsettingsRequest" auto verbose
-          timeout="10000"
-          url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}'
-          handle-as="json" loading="{{loading}}" on-error="handleRequestError"
-          last-response="{{appSettingsList}}" last-error="{{ajaxError}}">
-    </iron-ajax>
-     <!-- <div class="horizontal-section">
+    <template>
+
+        <paper-input hidden label="URL" value="{{url}}"></paper-input>
+        <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
+
+        <iron-ajax id="appsettingsRequest" auto verbose timeout="10000" url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{appSettingsList}}" last-error="{{ajaxError}}">
+        </iron-ajax>
+        <!-- <div class="horizontal-section">
       <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>
       <div>{{ajaxError}}</div>
       <div>{{error}}</div>
@@ -35,36 +39,55 @@
     </paper-material>
     </div> -->
 
-    <div class="horizontal-section">
-        <paper-material elevation="1">
-            <iron-data-table items="[[appSettingsList]]">
-                <data-table-column name="Type" width="50px" flex="0">
-                    <template>
-                        <iron-icon icon="hardware:smartphone" item-icon></iron-icon>
+        <div class="horizontal-section">
+            <paper-material elevation="1">
+                <iron-data-table items="[[appSettingsList]]">
+                    <data-table-column name="Type" width="50px" flex="0">
                         <template>
-                </data-table-column>
-                <data-table-column name="Internal ID" filter-by="id" sort-by="id">
-                    <template>[[item.id]]</template>
-                </data-table-column>
-                <data-table-column name="Description">
-                    <template>[[item.description]]</template>
-                </data-table-column>
-                <data-table-column name="App Settings Version" filter-by="appsettingsVersion">
-                    <template>[[item.version]]
+                            <iron-icon icon="settings" item-icon></iron-icon>
+                            <template>
+                    </data-table-column>
+                    <data-table-column name="Internal ID" filter-by="id" sort-by="id">
+                        <template>[[item.id]]</template>
+                    </data-table-column>
+                    <data-table-column name="Description">
+                        <template>[[item.description]]</template>
+                    </data-table-column>
+                    <data-table-column name="App Settings Version" filter-by="version" sort-by="version">
+                        <template>[[item.version]]
+                        </template>
+                    </data-table-column>
+                    <data-table-column name="State" filter-by="state">
+                        <template>
+                            [[item.state]]
+                            <paper-button hidden="[[item.version]]" data-id$="[[item.id]]" raised on-tap="releaseAppSettings">Release</paper-button>
+                            <paper-button data-id$="[[item.id]]" raised on-tap="showBindToDeviceDialog">Bind to</paper-button>
+                        </template>
+                    </data-table-column>
+                </iron-data-table>
+            </paper-material>
+        </div>
 
-                        <!-- <paper-button hidden="[[item.appsettingsVersion]]" data-id$="[[item.deviceId]]" raised on-tap="showAppSettingsDetails">Show</paper-button> -->
+        <paper-dialog id="BindDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <h2>Bind Config to Device</h2>
+            <p>App Config: [[currentAppSettingsId]]</p>
+            <paper-dropdown-menu id="deviceDropdown" label="Select Device ID">
+                <paper-menu class="dropdown-content">
+                    <template is="dom-repeat" items="[[devices]]">
+                        <paper-item data-id$="[[item.id]]">[[item.deviceId]]</paper-item>
                     </template>
-                </data-table-column>
-                <data-table-column name="State" filter-by="state">
-                    <template>
-                        [[item.state]]
-                        <paper-button hidden="[[item.version]]" data-id$="[[item.id]]" raised on-tap="releaseAppSettings">Release</paper-button>
-                    </template>
-                </data-table-column>
-            </iron-data-table>
-        </paper-material>
-    </div>
+                </paper-menu>
+            </paper-dropdown-menu>
+            <div class="buttons">
+                <paper-button raised dialog-dismiss>CANCEL</paper-button>
+                <paper-button raised on-tap="bind">BIND</paper-button>
+            </div>
+            <div class="error">
+                <span>[[error]]</span>
+            </div>
+        </paper-dialog>
 
+        <paper-toast id="bindtoast" text="Hello world!"></paper-toast>
 
-  </template>
+        </template>
 </dom-module>

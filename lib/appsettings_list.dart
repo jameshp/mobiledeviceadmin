@@ -14,6 +14,8 @@ import 'package:polymer_elements/paper_material.dart';
 import 'package:polymer_elements/paper_item.dart';
 import 'package:polymer_elements/paper_icon_item.dart';
 import 'package:polymer_elements/paper_item_body.dart';
+import 'package:polymer_elements/paper_menu.dart';
+import 'package:polymer_elements/paper_dropdown_menu.dart';
 import 'package:polymer_elements/iron_ajax.dart';
 import 'package:polymer_elements/iron_icon.dart';
 import 'package:polymer_elements/iron_icons.dart';
@@ -23,10 +25,23 @@ import 'package:web_components/web_components.dart';
 import 'package:mobiledeviceadmin/appsettings_item.dart';
 import 'package:custom_elements/iron_data_table.dart';
 
+//paper dialog imports
+import 'package:polymer_elements/paper_dialog.dart';
+import 'package:polymer_elements/neon_animation.dart';
+import 'package:polymer_elements/neon_animatable.dart';
+import 'package:polymer_elements/neon_animation/animations/scale_up_animation.dart';
+import 'package:polymer_elements/neon_animation/animations/fade_out_animation.dart';
+
+import 'package:polymer_elements/paper_toast.dart';
+import 'dart:convert';
+
 /// Uses [PaperInput]
 @PolymerRegister('appsettings-list')
 class AppsettingsList extends PolymerElement {
   IronAjax _appsettingsRequest;
+  PaperDialog _bindDialog;
+  PaperDropdownMenu _deviceDropdown;
+  PaperToast _bindToast;
 
   @property
   String url =
@@ -37,6 +52,12 @@ class AppsettingsList extends PolymerElement {
 
   @property
   String error = "";
+
+  @property
+  List<Map> devices;
+
+  @property
+  String currentAppSettingsId;
 
   @reflectable
   void ajaxErrorChanged(newValue, oldValue) {
@@ -49,6 +70,50 @@ class AppsettingsList extends PolymerElement {
   void handleRequestError(event, target) {
     print("handle Error $event - $target");
   }
+
+  @reflectable
+  void showBindToDeviceDialog(Event event, var target){
+    String appSettingsId = (event.currentTarget as PaperButton).dataset['id'];
+    //Show Dialog
+    print ("AppSettingsID: ${appSettingsId}");
+    set('currentAppSettingsId', appSettingsId);
+    print ("available Devices: ${devices}");
+    _bindDialog.open();
+  }
+
+  @reflectable
+  void bind(Event event, var target){
+    String internalDeviceId = (_deviceDropdown.selectedItem as PaperItem).dataset['id'];
+    print("selected item: ${_deviceDropdown.selectedItemLabel}");
+    print("internal id: $internalDeviceId");
+    BindDeviceRequest(currentAppSettingsId, internalDeviceId);
+  }
+
+  void BindDeviceRequest(String appSettingsId, String deviceId) {
+    String bindUrl = url + '/' + appSettingsId + '/devices/' + deviceId;
+    var httpRequest = new HttpRequest();
+    httpRequest
+      ..open('PUT', bindUrl)
+      ..setRequestHeader("Authorization", "Basic dXNlcjE6cGFzc3dvcmQ=") //todo fix with settings
+      ..onLoadEnd.listen((e) => bindRequestComplete(httpRequest))
+      ..send('');
+  }
+
+  bindRequestComplete(HttpRequest request) {
+    if (request.status == 200) {
+      var response = JSON.decode(request.responseText);
+      print("Binding Completed! $response");
+      _bindToast.text = "Binding Sucessful";
+      _bindToast.open();
+      set('error', "");
+    } else {
+      set('error', 'Request failed, status= ${request.status}');
+    }
+  }
+
+
+
+
 
   @reflectable
   releaseAppSettings(Event event, var target) {
@@ -77,36 +142,9 @@ class AppsettingsList extends PolymerElement {
             return false;
       }
     });
+    return true;
   }
-  // @property
-  // String headers = '{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}';
 
-  //'{"Origin" : "http://equipmentmanager.service.sitstlproxy.gpsllab.local"}';
-
-  // @Property(notify: true, observer: 'filterChanged', reflectToAttribute: true)
-  // String filter;
-  //
-  //
-  // @reflectable
-  // filterChanged(newValue,oldValue){
-  //      print ("Search Filter changed from {$oldValue} to {$newValue}");
-  //      ($$('#appsettingsList')as DomRepeat).render(); //call on each change of the filter attribute in oder that filterItems is executed
-  // }
-  //
-  // @reflectable
-  // filterItems(item){
-  //   print ("filter items for:  {$item}");
-  //   if (filter == ""){
-  //     return true;
-  //   }
-  //   else if (filter == null){
-  //     return true;
-  //   }
-  //   else {
-  //     String description = item['description'];
-  //     return description.contains(filter);
-  //   }
-  // }
 
   @reflectable
   reloadList() {
@@ -120,6 +158,9 @@ class AppsettingsList extends PolymerElement {
   /// property observers set up, event listeners attached).
   ready() {
     _appsettingsRequest = $$('#appsettingsRequest');
+    _bindDialog = $$('#BindDialog');
+    _deviceDropdown = $$('#deviceDropdown');
+    _bindToast = $$('#bindtoast');
     print("App Settings List init done");
   }
 }

@@ -80,7 +80,7 @@
                 <iron-pages selected="{{selected}}">
                     <div class="page">
                         <appsettings-detail id="devicedetail" device="[[selecteddevice]]"></appsettings-detail>
-                        <device-list id="devicelist" filter="{{search}}" device={{selecteddevice}}></device-list>
+                        <device-list id="devicelist" filter="{{search}}" device={{selecteddevice}} devicelist="{{devicelist}}"></device-list>
 
                         <paper-fab class="fab-button" icon="add" on-tap="showAddDeviceDialog"></paper-fab>
                         <paper-dialog id="AddDeviceDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
@@ -107,7 +107,7 @@
                     </div>
                     <div>
                         <div class="page">
-                            <appsettings-list></appsettings-list>
+                            <appsettings-list devices="[[devicelist]]"></appsettings-list>
 
                             <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
                             <add-appsettings id="AddAppsettings"></add-appsettings>
