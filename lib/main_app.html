@@ -67,6 +67,10 @@
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         <div title>Mobile Tolling Admin</div>
                         <paper-icon-button icon="search" on-tap="toggleSearch"></paper-icon-button>
+                        <config-settings
+                            environment="{{environment}}"
+                            user="{{user}}">
+                        </config-settings>
                         <paper-input id="search" type="search" value="{{search}}" hidden$={{searchTextHidden}} no-label-float></paper-input>
                     </app-toolbar>
                     <paper-tabs selected="{{selected}}">
@@ -80,13 +84,19 @@
                 <iron-pages selected="{{selected}}">
                     <div class="page">
                         <appsettings-detail id="devicedetail" device="[[selecteddevice]]"></appsettings-detail>
-                        <device-list id="devicelist" filter="{{search}}" device={{selecteddevice}} devicelist="{{devicelist}}"></device-list>
+
+                        <device-list id="devicelist"
+                          environment="[[environment]]"
+                          user="[[user]]"
+                          filter="{{search}}"
+                          device={{selecteddevice}}
+                          devicelist="{{devicelist}}"></device-list>
 
                         <paper-fab class="fab-button" icon="add" on-tap="showAddDeviceDialog"></paper-fab>
                         <paper-dialog id="AddDeviceDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
                             <h2>Add a device</h2>
                             <paper-dialog-scrollable>
-                                <form is="iron-form" method="post" action="http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' on-iron-form-response="onDeviceResponseReceived" id="deviceform" content-type="application/json">
+                                <form is="iron-form" method="post" action="[[environment.deviceListUrl]]" headers="[[user.authorizationHeader]]" on-iron-form-response="onDeviceResponseReceived" id="deviceform" content-type="application/json">
                                     <paper-input name="deviceId" label="Device ID" required></paper-input>
                                     <br>
                                     <paper-input name="description" label="Description" required></paper-input>
@@ -107,14 +117,20 @@
                     </div>
                     <div>
                         <div class="page">
-                            <appsettings-list devices="[[devicelist]]"></appsettings-list>
+                            <appsettings-list devices="[[devicelist]]" environment="[[environment]]"
+                            user="[[user]]"></appsettings-list>
 
                             <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
                             <add-appsettings id="AddAppsettings"></add-appsettings>
                         </div>
                     </div>
                     <div>Page 3 main content
-                        <paper-input id="pinput" label="Type something..." value="{{text}}"></paper-input>
+                        <paper-input id="pinput" label="Devicelist URL" value="[[environment.deviceListUrl]]"></paper-input>
+                        <paper-input id="pinput" label="Device Detail URL..." value="[[environment.deviceDetailUrl]]"></paper-input>
+                        <paper-input id="pinput" label="App settings url ..." value="[[environment.appSettingsUrl]]"></paper-input>
+                        <paper-input id="pinput" label="Protobuf conf url..." value="[[environment.protobufAppconfigConverterUrl]]"></paper-input>
+                        <paper-input id="pinput" label="User authorization header..." value="[[user.authorizationHeader]]"></paper-input>
+                        <paper-input id="pinput" label="User authorization token... " value="[[user.authorizationToken]]"></paper-input>
                         <p>
                             Text: <span>{{text}}</span>
                             <br /> Reversed: <span>{{reverseText(text)}}</span>

@@ -45,6 +45,8 @@ import 'package:polymer_elements/typography.dart';
 import 'package:polymer_elements/default_theme.dart';
 
 //own custom elements imports
+import 'package:mobiledeviceadmin/config_settings.dart';
+
 import 'package:mobiledeviceadmin/device_list.dart';
 import 'package:mobiledeviceadmin/appsettings_list.dart';
 

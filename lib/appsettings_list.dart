@@ -34,6 +34,7 @@ import 'package:polymer_elements/neon_animation/animations/fade_out_animation.da
 
 import 'package:polymer_elements/paper_toast.dart';
 import 'dart:convert';
+import 'package:mobiledeviceadmin/config_settings.dart';
 
 /// Uses [PaperInput]
 @PolymerRegister('appsettings-list')
@@ -43,9 +44,15 @@ class AppsettingsList extends PolymerElement {
   PaperDropdownMenu _deviceDropdown;
   PaperToast _bindToast;
 
+  @Property(observer: 'configChanged')
+  Environment environment;
+
+  @Property(observer: 'userChanged')
+  User user;
+
+
   @property
-  String url =
-      "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings";
+  String url; //=   "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings";
 
   @Property(observer: 'ajaxErrorChanged')
   Object ajaxError;
@@ -58,6 +65,27 @@ class AppsettingsList extends PolymerElement {
 
   @property
   String currentAppSettingsId;
+
+  @reflectable
+  void configChanged(Environment newValue, oldValue) {
+    print("Appsettings element - Envirnment settings changed: ${newValue}  + ${oldValue}");
+    //load devices if config is available - a bit dirty
+    set('url', newValue.appSettingsUrl);
+
+    if (user!=null){
+      loadList();
+    }
+
+  }
+
+  @reflectable
+  void userChanged(_,__){
+    if (environment != null){
+      loadList();
+    }
+  }
+
+
 
   @reflectable
   void ajaxErrorChanged(newValue, oldValue) {
@@ -94,7 +122,7 @@ class AppsettingsList extends PolymerElement {
     var httpRequest = new HttpRequest();
     httpRequest
       ..open('PUT', bindUrl)
-      ..setRequestHeader("Authorization", "Basic dXNlcjE6cGFzc3dvcmQ=") //todo fix with settings
+      ..setRequestHeader("Authorization", user.authorizationToken) //todo fix with settings
       ..onLoadEnd.listen((e) => bindRequestComplete(httpRequest))
       ..send('');
   }
@@ -110,8 +138,6 @@ class AppsettingsList extends PolymerElement {
       set('error', 'Request failed, status= ${request.status}');
     }
   }
-
-
 
 
 
@@ -133,7 +159,7 @@ class AppsettingsList extends PolymerElement {
     HttpRequest.request(url + '/' + appSettingsId,
         method: 'PUT',
         requestHeaders: {
-          "Authorization": "Basic dXNlcjE6cGFzc3dvcmQ="
+          "Authorization": user.authorizationToken
         }).then((roadFeatureRequest) {
           if (roadFeatureRequest.status == 200) {
             return true;
@@ -147,7 +173,10 @@ class AppsettingsList extends PolymerElement {
 
 
   @reflectable
-  reloadList() {
+  loadList() {
+    print ("Loading appsettingslist headers");
+    print (user.authorizationHeader);
+    this._appsettingsRequest.headers = {"Authorization": user.authorizationToken};
     this._appsettingsRequest.generateRequest();
   }
 

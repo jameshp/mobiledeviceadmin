@@ -32,10 +32,10 @@
 
     <template>
 
-        <paper-input hidden label="URL" value="{{url}}"></paper-input>
-        <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
+        <paper-input label="URL" value="{{url}}"></paper-input>
+        <paper-input label="detail url " value="{{detailUrl}}"></paper-input>
 
-        <iron-ajax id="deviceRequest" auto verbose timeout="10000" url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
+        <iron-ajax id="deviceRequest" verbose timeout="10000" url="[[url]]" headers="[[user.authorizationHeader]]" handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
         </iron-ajax>
 
         <!-- <div class="horizontal-section">
@@ -68,21 +68,13 @@
                     </data-table-column>
                     <data-table-column name="App Settings Version" filter-by="appsettingsVersion">
                         <template>
-                            <!-- <iron-ajax auto verbose url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices/{{item.deviceId}}/appsettings/LATEST" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" last-response="{{detail}}">
-                            </iron-ajax> -->
                             [[item.appsettingsVersion]]
-                            <!--[[detail.url]]-->
-
                             <paper-button hidden="[[!item.appsettingsVersion]]" data-id$="[[item.deviceId]]" raised on-tap="showAppSettingsDetails">Show</paper-button>
                         </template>
                     </data-table-column>
                     <data-table-column name="Road Features Version" filter-by="roadFeaturesVersion">
                         <template>
-                            <!-- <iron-ajax auto verbose url="http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices/{{item.deviceId}}/roadfeatures/LATEST" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" last-response="{{roadFeatures}}">
-                            </iron-ajax> -->
-
                             [[item.roadFeaturesVersion]]
-                            <!-- [[roadFeatures.url]] -->
                             <paper-button hidden="[[!item.roadFeaturesVersion]]" raised>Show</paper-button>
                         </template>
                     </data-table-column>

@@ -1,0 +1,968 @@
+[
+  {
+    "id": "e0c121cc-1d4a-4d40-810f-9d287021f858",
+    "description": "This is a SIT environment configuration file created by M. Polt",
+    "fileName": "spbt_config_SIT_environment_dietweis_context_v1.dat",
+    "version": 1,
+    "state": "RELEASED"
+  },
+  {
+    "id": "a4ac5b43-e3ba-4216-9e61-d1a38ab9be84",
+    "description": "sit config ohne road features",
+    "fileName": "sit_E2E_test_config_ohne_features_v1.b64",
+    "version": 2,
+    "state": "RELEASED"
+  },
+  {
+    "id": "7c6d2539-b6ed-4088-bc3a-a0cef11b860f",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config309119127077673.dat",
+    "version": 3,
+    "state": "RELEASED"
+  },
+  {
+    "id": "838ae348-a3cf-4728-a2bc-5473dae71068",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config644301110963544.dat",
+    "version": 4,
+    "state": "RELEASED"
+  },
+  {
+    "id": "e469b6fa-ce01-4c9d-a2c5-998b75686014",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config116125778920416.dat",
+    "version": 5,
+    "state": "RELEASED"
+  },
+  {
+    "id": "daca73b1-dee0-40ff-aae6-518295bc8700",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config368371743571703.dat",
+    "version": 6,
+    "state": "RELEASED"
+  },
+  {
+    "id": "1df07960-57b6-4447-88a1-4eba22beab95",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config212772422062249.dat",
+    "version": 16,
+    "state": "RELEASED"
+  },
+  {
+    "id": "89562dba-09b9-4c18-a7bc-8eaf189e5c36",
+    "description": "E2E Configuration File",
+    "fileName": "sit_E2E_test_config_ohne_features_v1.dat",
+    "version": 7,
+    "state": "RELEASED"
+  },
+  {
+    "id": "3037c091-6736-410b-a8f0-5f089c46b815",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config824924568930941.dat",
+    "version": 8,
+    "state": "RELEASED"
+  },
+  {
+    "id": "168b987f-8e4a-459e-8c63-cff638ea537e",
+    "description": "E2E Configuration File",
+    "fileName": "sit_E2E_test_config_ohne_features_v1.b64",
+    "version": 9,
+    "state": "RELEASED"
+  },
+  {
+    "id": "57ccad2f-06ab-4c91-901e-cb7e234366a9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config597710963818254.dat",
+    "version": 10,
+    "state": "RELEASED"
+  },
+  {
+    "id": "ffb7bc6e-b96e-4f8b-8bb2-8f55e0dc1bae",
+    "description": "This is a configuration file",
+    "fileName": "sit_large_scale_test_config_v1.b64",
+    "version": 11,
+    "state": "RELEASED"
+  },
+  {
+    "id": "0c4300b4-9fef-46bb-aa58-9b5e5b7bde56",
+    "description": "This is test config file wien dietweis - 100m max center distance (M. Polt created), zones in config file",
+    "fileName": "spbt_config_SIT_environment_dietweis_context_v7_100m_mcd_2016_04_22.b64",
+    "version": 12,
+    "state": "RELEASED"
+  },
+  {
+    "id": "9da357c6-d590-4a91-8a90-b388e0113000",
+    "description": "This is test config file wien dietweis - 40m max center distance (M. Polt created), zones in config file",
+    "fileName": "spbt_config_SIT_environment_dietweis_context_v7_40m_mcd_2016_04_22.b64",
+    "version": 13,
+    "state": "RELEASED"
+  },
+  {
+    "id": "16ffdb1c-6c0a-4b64-89b9-218c65f7a2c8",
+    "description": "JKR Descriptio\"\"n",
+    "fileName": "Backup.postman_dump",
+    "version": 14,
+    "state": "RELEASED"
+  },
+  {
+    "id": "625867f4-ba7b-447b-ba1a-1f335c87f85e",
+    "description": "LargeScaleTestUpdate 20160426",
+    "fileName": "sit_large_scale_test_config_v2.b64",
+    "version": 15,
+    "state": "RELEASED"
+  },
+  {
+    "id": "4d42b9b4-86d9-4476-bdc8-f03db9c5950e",
+    "description": "sicha nicht",
+    "fileName": "InfoDeliveryList.txt",
+    "version": 90,
+    "state": "RELEASED"
+  },
+  {
+    "id": "9dd9e000-6983-4391-8cf7-7137742c8a29",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config966219970616126.dat",
+    "version": 17,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8fbc9cc5-6b2e-44b8-8123-f8a61dc49e62",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config623348733783585.dat",
+    "version": 18,
+    "state": "RELEASED"
+  },
+  {
+    "id": "37ac0452-b557-4758-9fb3-9095a8fe1eb8",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config642096988325369.dat",
+    "version": 21,
+    "state": "RELEASED"
+  },
+  {
+    "id": "73186b04-ad2c-4dac-ace1-2c0c6156a44e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config596937130135899.dat",
+    "version": 23,
+    "state": "RELEASED"
+  },
+  {
+    "id": "4c1a6e7a-7d4b-4999-9003-4a1d858fa791",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config190387848957110.dat",
+    "version": 19,
+    "state": "RELEASED"
+  },
+  {
+    "id": "72e797c3-67a8-48f6-beeb-85ac774cac4e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config890390200404404.dat",
+    "version": 20,
+    "state": "RELEASED"
+  },
+  {
+    "id": "850d6404-07f4-46ca-8afa-d9dbddd8e982",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config261149603629304.dat",
+    "version": 22,
+    "state": "RELEASED"
+  },
+  {
+    "id": "b5ed2700-3a42-4d9a-abf5-a5ea8589eb5e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config709291349716032.dat",
+    "version": 26,
+    "state": "RELEASED"
+  },
+  {
+    "id": "ca084a64-015d-4cd9-a064-234b719b2a1e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config862048777177653.dat",
+    "version": 27,
+    "state": "RELEASED"
+  },
+  {
+    "id": "4780b99a-6687-4dab-89f5-0d68e3b52cf9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config491855236613440.dat",
+    "version": 29,
+    "state": "RELEASED"
+  },
+  {
+    "id": "4a83ec87-dd11-48cd-a646-35c189015ae9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config133211390499965.dat",
+    "version": 31,
+    "state": "RELEASED"
+  },
+  {
+    "id": "00b1ce9f-833a-4c60-a7cd-a121fb82655f",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config788903427193279.dat",
+    "version": 24,
+    "state": "RELEASED"
+  },
+  {
+    "id": "3abc456f-8845-417b-aa91-533f0689689d",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config615133733491977.dat",
+    "version": 25,
+    "state": "RELEASED"
+  },
+  {
+    "id": "faa01346-1741-45d8-83b3-f9d3355c38b0",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config113345704725833.dat",
+    "version": 28,
+    "state": "RELEASED"
+  },
+  {
+    "id": "3ecece43-2a5e-4e8e-baa6-bed3b8a11b82",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config812130296185208.dat",
+    "version": 30,
+    "state": "RELEASED"
+  },
+  {
+    "id": "2d0c0dfe-db15-4252-a1ae-fcbca6273af5",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config969999469550456.dat",
+    "version": 32,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f490c766-b06d-40ef-b56f-d007491d1f15",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config747568862431391.dat",
+    "version": 33,
+    "state": "RELEASED"
+  },
+  {
+    "id": "d3d2e68b-52eb-4bf0-a643-47e7df3dc4a9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config696520890865719.dat",
+    "version": 35,
+    "state": "RELEASED"
+  },
+  {
+    "id": "219e376b-79a7-4032-9ae1-9fbc2667363e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config489475768824895.dat",
+    "version": 38,
+    "state": "RELEASED"
+  },
+  {
+    "id": "c358321e-bfc9-47af-b829-9453d7049cf1",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config395691065313638.dat",
+    "version": 34,
+    "state": "RELEASED"
+  },
+  {
+    "id": "a5cfd877-2b57-4999-9a2a-646a23e36dd5",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config350326519281021.dat",
+    "version": 36,
+    "state": "RELEASED"
+  },
+  {
+    "id": "baaa1e62-1a20-43c7-aa6f-ad48ed6974a9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config226107143459579.dat",
+    "version": 37,
+    "state": "RELEASED"
+  },
+  {
+    "id": "1978d5e8-6b02-41c7-9912-93d38cf32766",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config143124322989361.dat",
+    "version": 39,
+    "state": "RELEASED"
+  },
+  {
+    "id": "c4d37610-5aa2-4d0c-ae17-aaa5f1f290e4",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config603462979793794.dat",
+    "version": 40,
+    "state": "RELEASED"
+  },
+  {
+    "id": "253a415b-00d1-43b9-81ed-209f6fe1a6a1",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config118955007291933.dat",
+    "version": 45,
+    "state": "RELEASED"
+  },
+  {
+    "id": "aecd5919-d254-4f84-9447-ac8e4146f3eb",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config486858914780173.dat",
+    "version": 51,
+    "state": "RELEASED"
+  },
+  {
+    "id": "284d870e-9b48-4458-b3fb-09c13832b438",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config559670333083548.dat",
+    "version": 41,
+    "state": "RELEASED"
+  },
+  {
+    "id": "78082ec8-95f5-4be7-a70d-25c55e38a3f4",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config990797779098338.dat",
+    "version": 47,
+    "state": "RELEASED"
+  },
+  {
+    "id": "c6951f75-121c-4fc5-b749-d377a260e3e5",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config370937304569425.dat",
+    "version": 42,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8b3fc783-8503-422f-b609-7e6075800685",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config124808908644260.dat",
+    "version": 43,
+    "state": "RELEASED"
+  },
+  {
+    "id": "37e5b8ae-d37d-4f0a-bb07-f76ded609c25",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config602452628211529.dat",
+    "version": 44,
+    "state": "RELEASED"
+  },
+  {
+    "id": "6d97c18b-b5ba-4382-82b0-c45115d51686",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config148195616146029.dat",
+    "version": 46,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f2287f56-e2c9-41a0-95a8-ad599c9877c9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config288910857755232.dat",
+    "version": 48,
+    "state": "RELEASED"
+  },
+  {
+    "id": "5c43fee9-3824-47a8-8c57-98da7fe99ab2",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config571442073606008.dat",
+    "version": 49,
+    "state": "RELEASED"
+  },
+  {
+    "id": "68d48469-0f31-49ec-866d-c959a58b753d",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config594650496883894.dat",
+    "version": 50,
+    "state": "RELEASED"
+  },
+  {
+    "id": "7b76ba64-1cf4-49f1-a51e-86c19835a971",
+    "description": "This is a first test configuration file for the australia trial, with zones in this config file",
+    "fileName": "sit_transurban_trial_test_config_v1_100m_mcd_2016_05_03.b64",
+    "version": 52,
+    "state": "RELEASED"
+  },
+  {
+    "id": "43e6eea5-8506-46f1-b25a-ebd1352fa01c",
+    "description": "This is a configuration file for Anil (with zones in australia) ",
+    "fileName": "sit_anil_test_config_v1_100m_mcd_2016_05_04.b64",
+    "version": 53,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f03be8be-7226-4836-8a44-e3bfb3cc7320",
+    "description": "testconfig for anil1 ",
+    "fileName": "sit_anil_test_config_v1_100m_mcd_2016_05_04.b64",
+    "version": 54,
+    "state": "RELEASED"
+  },
+  {
+    "id": "d6edf581-633e-49a4-b4d9-187bc21bbbe0",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config654003550660525.dat",
+    "version": 55,
+    "state": "RELEASED"
+  },
+  {
+    "id": "c53aa8f1-1ae7-4934-bbf1-9b53bef493ed",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config166259157843104.dat",
+    "version": 56,
+    "state": "RELEASED"
+  },
+  {
+    "id": "61445ec5-7081-49cd-a7e7-d530997eb17e",
+    "description": "dietweis - wien context v8 - fix zone119, fix coordinates, new position interval config",
+    "fileName": "SIT_environment_dietweis_context_v8_100m_mcd_2016_05_11.b64",
+    "version": 57,
+    "state": "RELEASED"
+  },
+  {
+    "id": "30e91dae-57d1-4b6f-a8ac-da327964538f",
+    "description": "dietweis - wien context v8 40meter max center distance - fix zone119, fix coordinates, new position interval config",
+    "fileName": "SIT_environment_dietweis_context_v8_40m_mcd_2016_05_11.b64",
+    "version": 58,
+    "state": "RELEASED"
+  },
+  {
+    "id": "bb027f18-1c9b-49ec-8016-24259692162b",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config531115062192063.dat",
+    "version": 59,
+    "state": "RELEASED"
+  },
+  {
+    "id": "65ff25bb-fd15-410d-8963-30f093599094",
+    "description": "dietweis - wien context v8 -100m max center distance fix zone119, fix coordinates, new position interval config",
+    "fileName": "SIT_environment_dietweis_context_v8_100m_mcd_2016_05_11.b64",
+    "version": 60,
+    "state": "RELEASED"
+  },
+  {
+    "id": "a5727ed1-fcc5-4b9c-a1d1-05e6a7d28b27",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config468320416292983.dat",
+    "version": 61,
+    "state": "RELEASED"
+  },
+  {
+    "id": "57415328-b30b-4fd1-b425-4d0661a68213",
+    "description": "sit_large_scale_test_config_v3_1sec_20meter.b64",
+    "fileName": "sit_large_scale_test_config_v3_1sec_20meter.b64",
+    "version": 62,
+    "state": "RELEASED"
+  },
+  {
+    "id": "3577747e-fad3-45b8-a3c5-f090f69602b1",
+    "description": "australia - updated context, position collection interval and coordinates fixed",
+    "fileName": "sit_transurban_trial_test_config_v3_100m_mcd_2016_05_12.b64",
+    "version": 63,
+    "state": "RELEASED"
+  },
+  {
+    "id": "1b86155a-5d7b-4445-a990-48d4bc10978b",
+    "description": "dietweis - wien context v9 -config update interval 600s test",
+    "fileName": "SIT_environment_dietweis_context_v9_100m_mcd_2016_05_11.b64",
+    "version": 64,
+    "state": "RELEASED"
+  },
+  {
+    "id": "5389f896-aae2-4249-89e5-3af7804bc9db",
+    "description": "dietweis - wien context v10 - 3 point zones in Both directions  40m max center distance",
+    "fileName": "SIT_environment_dietweis_context_v10_40m_mcd_zones_in_both_directions_2016_05_20.b64",
+    "version": 67,
+    "state": "RELEASED"
+  },
+  {
+    "id": "db48a700-20d5-4496-85b2-1e39a084bdd4",
+    "description": "dietweis - wien context v10 - 3 point zones in Both directions  100m max center distance",
+    "fileName": "SIT_environment_dietweis_context_v10_100m_mcd_zones_in_both_directions_2016_05_20.b64",
+    "version": 68,
+    "state": "RELEASED"
+  },
+  {
+    "id": "3a6cdd47-fc3a-4c05-9ff7-bdeb817184ee",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config481985874111267.dat",
+    "version": 65,
+    "state": "RELEASED"
+  },
+  {
+    "id": "b9de17e6-5fd5-424c-9329-89bacb23f729",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config606833064549529.dat",
+    "version": 66,
+    "state": "RELEASED"
+  },
+  {
+    "id": "68fab18a-eb51-4ce7-b08d-3b9f01800f50",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config535395484077291.dat",
+    "version": 69,
+    "state": "RELEASED"
+  },
+  {
+    "id": "6328b569-4724-404d-8a79-9958e71cae0d",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config605362760302912.dat",
+    "version": 71,
+    "state": "RELEASED"
+  },
+  {
+    "id": "7dbdaa94-dc5b-437f-b363-63ceafe5de9a",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config227785687463075.dat",
+    "version": 70,
+    "state": "RELEASED"
+  },
+  {
+    "id": "14ea1ad4-d49f-4ea2-94a4-7bc8b542e11e",
+    "description": "sit_large_scale_test_config_v4_1sec_10meter.b64",
+    "fileName": "sit_large_scale_test_config_v4_1sec_10meter.b64",
+    "version": 72,
+    "state": "RELEASED"
+  },
+  {
+    "id": "aa2cf87b-19c2-47cb-aa6f-2306ea6ba7d8",
+    "description": "Robot_TestUpload",
+    "fileName": "spbt_cfg_b64tvdqdn.dat",
+    "version": 92,
+    "state": "RELEASED"
+  },
+  {
+    "id": "0eab9357-477b-4663-badc-eb7bd7d65373",
+    "description": "cfg_file",
+    "fileName": "xxx.dat",
+    "version": 93,
+    "state": "RELEASED"
+  },
+  {
+    "id": "ae556603-9575-424d-b182-8c7770ba9bb6",
+    "description": "Robot_TestUpload",
+    "fileName": "spbt_cfg_b64tvdqdn.dat",
+    "version": 94,
+    "state": "RELEASED"
+  },
+  {
+    "id": "631da6a7-c78f-4cd7-832f-7d3974b9629b",
+    "description": "Robot_TestUpload",
+    "fileName": "spbt_cfg_b64tvdqdn.dat",
+    "version": 95,
+    "state": "RELEASED"
+  },
+  {
+    "id": "2cfcedf9-0961-4fea-8b1f-ddf6d5726adf",
+    "description": "cfg_file",
+    "fileName": "xxx.dat",
+    "version": 125,
+    "state": "RELEASED"
+  },
+  {
+    "id": "4108ef9b-ccc8-44ad-976f-e8ec328fbb1e",
+    "description": "cfg_file",
+    "fileName": "xxx.dat",
+    "version": 126,
+    "state": "RELEASED"
+  },
+  {
+    "id": "033aaf4c-01fe-49b4-9326-ddd8d7054d65",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config960131193640262.dat",
+    "version": 73,
+    "state": "RELEASED"
+  },
+  {
+    "id": "82988fc6-923a-4137-a35c-015d892230de",
+    "description": "dietweis - wien context 11 -reduced logging",
+    "fileName": "SIT_environment_dietweis_context_v11_40m_mcd_zones_in_both_directions_2016_05_30.b64",
+    "version": 74,
+    "state": "RELEASED"
+  },
+  {
+    "id": "26320d05-c02b-4829-8f2c-c25e3e1e8d56",
+    "description": "dietweis - wien context 12 -80m max center distance, 7days expiry, a position every 10meters",
+    "fileName": "SIT_environment_dietweis_context_v12_80m_mcd_zones_in_both_directions_2016_06_03.b64",
+    "version": 75,
+    "state": "RELEASED"
+  },
+  {
+    "id": "5e8e7044-44d2-4729-b7b6-2800e4368947",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config298464519892889.dat",
+    "version": 76,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8f92b11c-b825-4cc9-aad8-dd03e03a2136",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config696894385379214.dat",
+    "version": 78,
+    "state": "RELEASED"
+  },
+  {
+    "id": "d98f3f6b-443d-40e6-a284-2fdb87fe107c",
+    "description": "testdeviceconfig für rodrigo",
+    "fileName": "spbt_conf_testdevice_rodrigo.dat.b64",
+    "version": 82,
+    "state": "RELEASED"
+  },
+  {
+    "id": "686baa57-f0d1-415b-8f05-3cf970a97c76",
+    "description": "updated testdeviceconfig für rodrigo",
+    "fileName": "spbt_conf_rodrigo2.dat.b64",
+    "version": 83,
+    "state": "RELEASED"
+  },
+  {
+    "id": "58bc657b-be4e-41b8-9e8c-cb8f5336721d",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config200614905826077.dat",
+    "version": 77,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8ddb89a5-4aa5-4de2-80e3-07daed3e761f",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config231457658560731.dat",
+    "version": 79,
+    "state": "RELEASED"
+  },
+  {
+    "id": "bb272a75-f0c7-421c-b1a6-c564f4ba33f5",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config758539422749960.dat",
+    "version": 80,
+    "state": "RELEASED"
+  },
+  {
+    "id": "ff44bbc2-e575-4179-a9e7-2e26c1a49250",
+    "description": "poschinger testconfig v1",
+    "fileName": "poschinger_spbt_conf_test.b64",
+    "version": 81,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8e48f117-afb5-43cf-9e95-48e3fa33acb8",
+    "description": "Rodrigo 3 config 2016-07-05",
+    "fileName": "spbt_conf_rodrigo3.dat.b64",
+    "version": 84,
+    "state": "RELEASED"
+  },
+  {
+    "id": "750ed4cd-162e-4e6d-87f6-06ebc9560f06",
+    "description": "This is a configuration file",
+    "fileName": "spbt_conf.b64",
+    "version": 85,
+    "state": "RELEASED"
+  },
+  {
+    "id": "6fb5de67-db9a-4512-b39f-e8ad908c3e30",
+    "description": "dietweis - wien context v13 latlong coordinates inversion fix",
+    "fileName": "SIT_environment_dietweis_context_v13_80m_mcd_zones_in_both_directions_latlong_inverted_2016_07_06.dat.b64",
+    "version": 86,
+    "state": "RELEASED"
+  },
+  {
+    "id": "af324c9a-0d35-413f-92a5-d9eadfcde735",
+    "description": "This is a configuration file",
+    "fileName": "spbt_conf.b64",
+    "version": 87,
+    "state": "RELEASED"
+  },
+  {
+    "id": "054e4510-90e5-49ab-b60a-8118a1713d9e",
+    "description": "poschinger test coordinates inversion fix",
+    "fileName": "poschinger_spbt_conf_test_latlong_inverted_2016_07_06.dat.b64",
+    "version": 88,
+    "state": "RELEASED"
+  },
+  {
+    "id": "435ca835-2f74-4ea5-9652-e211c8fbf405",
+    "description": "This is a configuration file",
+    "fileName": "spbt_conf.b64",
+    "version": 89,
+    "state": "RELEASED"
+  },
+  {
+    "id": "30349585-bba2-4588-8db6-982fe45e359f",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config328551891521838.dat",
+    "version": 91,
+    "state": "RELEASED"
+  },
+  {
+    "id": "401728d5-56e4-421c-b5d3-d257e5366c6a",
+    "description": "dietweis - wien context v14 - optimized each direction of zone",
+    "fileName": "SIT_dietweis_context_v14_2016_07_08.dat.b64",
+    "version": 96,
+    "state": "RELEASED"
+  },
+  {
+    "id": "fd4d7800-0a3a-417a-9ae6-197879f2338b",
+    "description": "large scale config v5 - new 3 point zones (coordinates inverted) compatible with versions >0.12.962",
+    "fileName": "sit_large_scale_test_config_v5.dat.b64",
+    "version": 100,
+    "state": "RELEASED"
+  },
+  {
+    "id": "d5bb6199-ff39-492e-be32-27dee4757a76",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config487706355110221.dat",
+    "version": 97,
+    "state": "RELEASED"
+  },
+  {
+    "id": "2fb1a225-53c4-4ed1-958d-9f038240a78e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config999868746531086.dat",
+    "version": 98,
+    "state": "RELEASED"
+  },
+  {
+    "id": "0d268def-5311-4596-b3fd-2e442ebbae05",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config389200348504192.dat",
+    "version": 99,
+    "state": "RELEASED"
+  },
+  {
+    "id": "77a9a1a1-aed1-4273-af35-41904b988218",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config729511237626623.dat",
+    "version": 101,
+    "state": "RELEASED"
+  },
+  {
+    "id": "e3d55db6-61a7-44ce-b479-904199a2a7ef",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config157462291131517.dat",
+    "version": 102,
+    "state": "RELEASED"
+  },
+  {
+    "id": "70a87dc1-f846-4433-8b70-bf26f0c6689b",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config711053115952368.dat",
+    "version": 103,
+    "state": "RELEASED"
+  },
+  {
+    "id": "5d24992a-3d5f-45d6-8ce2-18a876006c9a",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config813680772561124.dat",
+    "version": 107,
+    "state": "RELEASED"
+  },
+  {
+    "id": "be11b39f-b272-41be-a2f9-2674908a42b9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config786805844542408.dat",
+    "version": 108,
+    "state": "RELEASED"
+  },
+  {
+    "id": "064976c6-36d2-4208-8fb7-04cdc4e50e3b",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config429091835568312.dat",
+    "version": 104,
+    "state": "RELEASED"
+  },
+  {
+    "id": "5ad2e572-7f0f-41cc-b05c-99992cff3c06",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config985440611258853.dat",
+    "version": 105,
+    "state": "RELEASED"
+  },
+  {
+    "id": "9a5c407f-66c6-40fa-a33f-9f3340cddbce",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config963380912904808.dat",
+    "version": 106,
+    "state": "RELEASED"
+  },
+  {
+    "id": "d5c92f91-7c1a-4f17-b3dc-aa6e1325671b",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config465936880571577.dat",
+    "version": 109,
+    "state": "RELEASED"
+  },
+  {
+    "id": "778cf181-2817-4f31-a149-95da835576ef",
+    "description": "poschinger train route test config - with actions",
+    "fileName": "poschinger_spbt_conf_test_latlong_inverted_2016_07_22.dat.b64",
+    "version": 121,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8cc4b2bc-9a88-4848-b698-e01767ff7391",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config450538545626847.dat",
+    "version": 110,
+    "state": "RELEASED"
+  },
+  {
+    "id": "39ffbf6d-e352-48ea-996f-82c048ac4828",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config351904744529135.dat",
+    "version": 111,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f77eef45-5d11-47ce-960d-6e78554ae6b4",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config678175403104297.dat",
+    "version": 112,
+    "state": "RELEASED"
+  },
+  {
+    "id": "85778339-c6a5-448e-a6a5-8ef7a7fd048f",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config960836599983586.dat",
+    "version": 113,
+    "state": "RELEASED"
+  },
+  {
+    "id": "cd7ddf98-a066-4703-a32d-413ba38f248c",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config175940919985545.dat",
+    "version": 114,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f2bacfa8-bca7-46f5-a131-06fc5902c6bd",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config920527220957530.dat",
+    "version": 115,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f8bb7dc0-97ea-4f48-8dcc-1985ca79514c",
+    "description": "Siegl Thomas App Settings Test",
+    "fileName": "poschinger_spbt_conf_thomasincluded_2016_07_25.dat.b64",
+    "version": 123,
+    "state": "RELEASED"
+  },
+  {
+    "id": "a7371404-d82d-43d1-9491-fcb7a02d72a1",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config685659139605001.dat",
+    "version": 116,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f7f53d53-eedc-476e-82d6-de4c4f747fc2",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config507500308474121.dat",
+    "version": 117,
+    "state": "RELEASED"
+  },
+  {
+    "id": "f94c29aa-1228-4608-8153-0fa347eae36f",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config511786011439504.dat",
+    "version": 118,
+    "state": "RELEASED"
+  },
+  {
+    "id": "bffee047-e239-4dd8-b189-9b8a64f2132b",
+    "description": "Dietweis - Wien Context v15 with TTS actions",
+    "fileName": "SIT_dietweis_context_v15_2016_07_22.dat.b64",
+    "version": 120,
+    "state": "RELEASED"
+  },
+  {
+    "id": "a1b50661-1f57-4cbe-9ac4-9e14c3b714e5",
+    "description": "ITS World Congress 2016 app settings - first version",
+    "fileName": "app_config_its_worldcongress.dat.b64",
+    "version": 124,
+    "state": "RELEASED"
+  },
+  {
+    "id": "94cbccb0-c1f4-4d19-a04f-92076153b0fd",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config620762131817198.dat",
+    "version": 127,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8ca087e3-2745-4d70-9b30-55ce4e3c8bd3",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config188694531993297.dat",
+    "version": 119,
+    "state": "RELEASED"
+  },
+  {
+    "id": "89b7bbd9-c92c-418b-a0d6-0ab8a29c2d66",
+    "description": "This is a configuration file",
+    "fileName": "sit_large_scale_test_config_for_E2E_v5.dat.b64",
+    "version": 122,
+    "state": "RELEASED"
+  },
+  {
+    "id": "1016b8da-2203-4aa5-8fd2-f4a068dd22ac",
+    "description": "E2E Config_ohne_RoadFeatures_new_RegionCode",
+    "fileName": "sit_E2E_test_config_ohne_features_v1.b64",
+    "version": 128,
+    "state": "RELEASED"
+  },
+  {
+    "id": "61de225c-aeab-4f26-9566-fd47f9d4bd09",
+    "description": "This is a configuration file",
+    "fileName": "spbt_conf.b64",
+    "version": 129,
+    "state": "RELEASED"
+  },
+  {
+    "id": "1ab4bc02-001f-4d5e-a640-24d3040ab70e",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config532933216458223.dat",
+    "version": 130,
+    "state": "RELEASED"
+  },
+  {
+    "id": "2c42f3b1-fc9e-405a-a6f9-cb4dc8b114c6",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config995987593907546.dat",
+    "version": 131,
+    "state": "RELEASED"
+  },
+  {
+    "id": "d44512d0-4244-40a3-9e5b-e6f099257218",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config796446214908632.dat",
+    "version": 132,
+    "state": "RELEASED"
+  },
+  {
+    "id": "7cb6bc26-1452-455b-962a-445b88c42ff6",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config849713417093243.dat",
+    "version": 133,
+    "state": "RELEASED"
+  },
+  {
+    "id": "de58bd3a-3f8b-4358-a13e-d494330892e9",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config722005514396940.dat",
+    "version": 136,
+    "state": "RELEASED"
+  },
+  {
+    "id": "44ad0e4a-4379-49d8-a119-5e4cbc6eb261",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config617216993800892.dat",
+    "version": 134,
+    "state": "RELEASED"
+  },
+  {
+    "id": "56843d90-1c76-4f2c-b9ad-74842803aaa5",
+    "description": "AppConfigForTestautomation",
+    "fileName": "Config703320897208298.dat",
+    "version": 135,
+    "state": "RELEASED"
+  },
+  {
+    "id": "45acb97b-0319-4acc-ab55-59a1bc48571d",
+    "description": "This is a configuration file for ios auto_tests",
+    "fileName": "spbt_conf.b64",
+    "version": 137,
+    "state": "RELEASED"
+  },
+  {
+    "id": "8f1d77ac-b41b-4e0e-a224-fdbe44e9fe70",
+    "description": "2nd ITS world congress version (changed toll point 3) ",
+    "fileName": "app_config_its_worldcongress.dat.b64",
+    "version": 138,
+    "state": "RELEASED"
+  }
+]

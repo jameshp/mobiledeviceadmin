@@ -26,7 +26,7 @@
         <paper-input hidden label="URL" value="{{url}}"></paper-input>
         <!-- <paper-input label="Headers" value="{{headers}}"></paper-input> -->
 
-        <iron-ajax id="appsettingsRequest" auto verbose timeout="10000" url="[[url]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{appSettingsList}}" last-error="{{ajaxError}}">
+        <iron-ajax id="appsettingsRequest" verbose timeout="10000" url="[[url]]" headers="[[user.authorizationHeader]]" handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{appSettingsList}}" last-error="{{ajaxError}}">
         </iron-ajax>
         <!-- <div class="horizontal-section">
       <paper-spinner active="{{loading}}" hidden={{!loading}}></paper-spinner>

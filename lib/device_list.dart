@@ -30,6 +30,7 @@ import 'package:web_components/web_components.dart';
 import 'package:custom_elements/iron_data_table.dart';
 
 import 'package:mobiledeviceadmin/device_item.dart';
+import 'package:mobiledeviceadmin/config_settings.dart';
 
 
 
@@ -38,12 +39,17 @@ import 'package:mobiledeviceadmin/device_item.dart';
 class DeviceList extends PolymerElement {
   IronAjax _deviceRequest;
 
-  @property
-  String url =
-      "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices";
+  @Property(observer: 'configChanged')
+  Environment environment;
 
-  String detailUrl =
-      "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices";
+  @Property(observer: 'userChanged')
+  User user;
+
+  @property
+  String url; //= "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices";
+
+  @property
+  String detailUrl;// = "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices";
 
   @Property(observer: 'ajaxErrorChanged')
   Object ajaxError;
@@ -62,6 +68,30 @@ class DeviceList extends PolymerElement {
     print("AjaxError_new: ${newValue}  + ${oldValue}");
     set('error', _deviceRequest.lastError);
     print("Ajax Error2 : ${_deviceRequest.lastError}");
+  }
+
+  @reflectable
+  void configChanged(Environment newValue, oldValue) {
+    print("Envirnment settings changed: ${newValue}  + ${oldValue}");
+    //load devices if config is available - a bit dirty
+    set('url', newValue.deviceListUrl);
+    set('detailUrl', newValue.deviceDetailUrl);
+
+    print("devicelist config changed!");
+    if (user!=null){
+      print("load devicelist");
+      loadDeviceList();
+    }
+
+  }
+
+  @reflectable
+  void userChanged(_,__){
+    print("devicelist user changed!");
+    if (environment != null){
+      print("load devicelist");
+      loadDeviceList();
+    }
   }
 
   @reflectable
@@ -87,7 +117,7 @@ class DeviceList extends PolymerElement {
     var httpRequest = new HttpRequest();
     httpRequest
       ..open('GET', url)
-      ..setRequestHeader("Authorization", "Basic dXNlcjE6cGFzc3dvcmQ=")
+      ..setRequestHeader("Authorization", user.authorizationToken)
       ..onLoadEnd.listen((e) => requestComplete(httpRequest))
       ..send('');
   }
@@ -127,7 +157,7 @@ class DeviceList extends PolymerElement {
     var roadFeatureRequest = await HttpRequest.request(
         detailUrl + '/' + dev['deviceId'] + '/roadfeatures/LATEST',
         method: 'GET',
-        requestHeaders: {"Authorization": "Basic dXNlcjE6cGFzc3dvcmQ="});
+        requestHeaders: {"Authorization": user.authorizationToken});
 
     if (roadFeatureRequest.status == 200) {
       Map roadFeatures = JSON.decode(roadFeatureRequest.responseText);
@@ -142,7 +172,7 @@ class DeviceList extends PolymerElement {
         detailUrl + '/' + dev['deviceId'] + '/appsettings/LATEST',
         method: 'GET',
         requestHeaders: {
-          "Authorization": "Basic dXNlcjE6cGFzc3dvcmQ="
+          "Authorization": user.authorizationToken
         }); //dev['deviceId']
     if (request.status == 200) {
       Map appSettings = JSON.decode(request.responseText);
@@ -154,26 +184,6 @@ class DeviceList extends PolymerElement {
     return;
   }
 
-  // @Property(notify: true, observer: 'filterChanged', reflectToAttribute: true)
-  // String filter;
-
-  // @reflectable
-  // filterChanged(newValue,oldValue){
-  //      print ("Search Filter changed from {$oldValue} to {$newValue}");
-  //      ($$('#deviceList')as DomRepeat).render(); //call on each change of the filter attribute in oder that filterItems is executed
-  // }
-
-  // @reflectable
-  // filterItems(item){
-  //   print ("filter items for:  {$item}");
-  //   if (filter == ""){
-  //     return true;
-  //   }
-  //   else {
-  //     String deviceID = item['deviceId'];
-  //     return deviceID.contains(filter);
-  //   }
-  // }
 
   @reflectable
   reloadList() {
@@ -195,6 +205,6 @@ class DeviceList extends PolymerElement {
   ready() {
     _deviceRequest = $$('#deviceRequest');
     print("DevicList init done");
-    loadDeviceList();
+    //loadDeviceList();
   }
 }
