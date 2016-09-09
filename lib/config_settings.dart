@@ -57,9 +57,12 @@ class User extends JsProxy {
    String protobufAppconfigConverterUrl;
 
    @reflectable
+   String jsonToProtobufConverterUrl;
+
+   @reflectable
    String name;
 
-   Environment(this.name, this.deviceListUrl, this.deviceDetailUrl, this.appSettingsUrl, this.protobufAppconfigConverterUrl);
+   Environment(this.name, this.deviceListUrl, this.deviceDetailUrl, this.appSettingsUrl, this.protobufAppconfigConverterUrl, this.jsonToProtobufConverterUrl);
  }
 
 
@@ -81,8 +84,8 @@ class ConfigSettings extends PolymerElement {
   /// Called when main-app has been fully prepared (Shadow DOM created,
   /// property observers set up, event listeners attached).
   ready() {
-    set('environment', new Environment("TEST", "test_devices.json", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices", "test_appsettings.json", "http://localhost:4242/appconfigapi/v1/appconfig"));
-    //set('environment', new Environment("SIT", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings", "http://localhost:4242/appconfigapi/v1/appconfig"));
+    //set('environment', new Environment("TEST", "test_devices.json", "https://qa.stlproxy.kapschtraffic.com:8443/smartphone/v2/devices", "test_appsettings.json", "http://192.168.99.100:8080/appconfigapi/v1/appconfig"));
+    set('environment', new Environment("SIT", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings", "http://192.168.99.100:8081/appconfigapi/v1/appconfig", "http://192.168.99.100:8081/appconfigapi/v1/json2base64"));
     set('user', new User("polt","polt", {"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}, "Basic dXNlcjE6cGFzc3dvcmQ="));
     print("Config Settings Item created");
   }

@@ -62,10 +62,10 @@
             <app-header-layout>
 
                 <app-header fixed>
-
                     <app-toolbar>
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         <div title>Mobile Tolling Admin</div>
+                        <div>Environment: [[environment.name]]</div>
                         <paper-icon-button icon="search" on-tap="toggleSearch"></paper-icon-button>
                         <config-settings
                             environment="{{environment}}"
@@ -76,14 +76,14 @@
                     <paper-tabs selected="{{selected}}">
                         <paper-tab>DEVICES</paper-tab>
                         <paper-tab>APP SETTINGS</paper-tab>
-                        <paper-tab>ROAD FEATURE SETTINGS</paper-tab>
+                        <paper-tab>SETTINGS</paper-tab>
                     </paper-tabs>
 
                 </app-header>
 
                 <iron-pages selected="{{selected}}">
                     <div class="page">
-                        <appsettings-detail id="devicedetail" device="[[selecteddevice]]"></appsettings-detail>
+                        <appsettings-detail id="devicedetail" device="[[selecteddevice]]" url="[[environment.protobufAppconfigConverterUrl]]"></appsettings-detail>
 
                         <device-list id="devicelist"
                           environment="[[environment]]"
@@ -121,7 +121,7 @@
                             user="[[user]]"></appsettings-list>
 
                             <paper-fab class="fab-button" icon="add" on-tap="showAddAppsettingsDialog"></paper-fab>
-                            <add-appsettings id="AddAppsettings"></add-appsettings>
+                            <add-appsettings id="AddAppsettings" user="[[user]]" url="[[environment.jsonToProtobufConverterUrl]]" add-device-settings-url="[[environment.appSettingsUrl]]"></add-appsettings>
                         </div>
                     </div>
                     <div>Page 3 main content

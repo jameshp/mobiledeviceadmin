@@ -1,23 +1,24 @@
 <dom-module id="add-appsettings">
-  <style>
-    :host {
-      display: block;
-    }
+    <style>
+         :host {
+            display: block;
+        }
 
-    paper-progress {
-        --paper-progress-transition-duration: 0.08s;
-        --paper-progress-transition-timing-function: ease;
-        --paper-progress-transition-transition-delay: 0s;
-    }
+        paper-progress {
+            --paper-progress-transition-duration: 0.08s;
+            --paper-progress-transition-timing-function: ease;
+            --paper-progress-transition-transition-delay: 0s;
+        }
+    </style>
 
-  </style>
-
-  <template>
+    <template>
     <paper-dialog id="dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-      <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress>
-      <file-upload auto url="http://localhost:4242/appconfigapi/v1/json2base64" upload-progress="{{uploadProgress}}" error="{{error}}" files="{{files}}">
+      <!-- <paper-progress class="transiting" value="{{uploadprogress}}"></paper-progress> -->
+      <h2>Upload App Settings File</h2>
+      <paper-input id="description" name="description" label="Description" required auto-validate error-message="Please add a description" value={{description}}></paper-input>
+      <file-upload auto url="{{url}}" upload-progress="{{uploadProgress}}" error="{{error}}" files="{{uploadedFiles}}" converted-appconfig="{{convertedConfig}}">
       </file-upload>
-      <template is="dom-repeat" items="[[files]]" id="files">
+      <template is="dom-repeat" items="[[uploadedFiles]]" id="files">
           <!-- <div>File Name: [[item.fileName]]</div>
           <div>File Size: [[item.fileSize]]</div>
           <div>File Type: [[item.fileType]]</div>
@@ -27,13 +28,16 @@
           <div>File Error: [[item.error]]</div>
           <div>File Converted: [[item.responseContent]]</div>
       </template>
+      <paper-button hidden$="{{!convertedConfig}}" on-tap="uploadAppSettingsToProxy">Upload App Settings File</paper-button>
+      <div hidden$="{{!error}}">Ups..Error: {{error}}</div>
+    <!-- <div>Base64: <span>{{convertedConfig.base64AppConfig}}</span></div> -->
 
-      <div>Error: {{error}}</div>
-      <div>Overall Progress:
+    <!-- <div>Error: {{error}}</div> -->
+    <!-- <div>Overall Progress:
           <paper-progress class="transiting" value="{{uploadProgress}}"></paper-progress>
-      </div>
+      </div> -->
     </paper-dialog>
 
-  </template>
+    </template>
 
 </dom-module>

@@ -38,6 +38,9 @@ class AppsettingsDetail extends PolymerElement {
   PaperDialog appSettingsContentDialog;
 
   @property
+  String url;
+
+  @property
   Map data;  //shown app settings content
 
   @property
@@ -63,7 +66,7 @@ class AppsettingsDetail extends PolymerElement {
         ..appendBlob('appConfig', blob, 'appsettings.b64');
 
     final response = await HttpRequest.request(
-          'http://localhost:4242/appconfigapi/v1/appconfig',
+          url, //'http://localhost:4242/appconfigapi/v1/appconfig',
           method: 'POST',
           sendData: form);
     final result = JSON.decode(response.responseText);

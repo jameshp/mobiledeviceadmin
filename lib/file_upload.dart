@@ -85,6 +85,9 @@ class FileUpload extends PolymerElement {
   @Property(notify: true)
   List<UploadFile> files = [];
 
+  @Property(notify: true)
+  Map convertedAppconfig;
+
   @reflectable
   void clicked(_, __) {
     print("Do Upload clicked");
@@ -294,6 +297,7 @@ class FileUpload extends PolymerElement {
           var  result = JSON.decode(req.responseText);
           print (result);
           set('files.${index}.responseContent', result);
+          set('convertedAppconfig', result); //set the base 64 content value
           set(path, 100);
         }
         if (req.readyState == HttpRequest.DONE &&(req.status == 500)){
