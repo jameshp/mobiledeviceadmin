@@ -62,6 +62,9 @@ class AddAppsettings extends PolymerElement {
   @Property(observer: 'convertedConfigUpdate')
   Map convertedConfig;
 
+  @property
+  bool configReady = false;
+
   // @Property(notify: true, observer: 'uploadFilesChanged')
   // var files;
 
@@ -74,6 +77,7 @@ class AddAppsettings extends PolymerElement {
     var config = convertedConfig['base64AppConfig'];
     print ("APP config to be uploaded: ${config}");
     // print ("Trigger upload!");
+    set('configReady', true);
     // uploadAppSettingsToProxy();
     return;
   }

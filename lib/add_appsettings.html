@@ -28,7 +28,8 @@
           <div>File Error: [[item.error]]</div>
           <div>File Converted: [[item.responseContent]]</div>
       </template>
-      <paper-button hidden$="{{!convertedConfig}}" on-tap="uploadAppSettingsToProxy">Upload App Settings File</paper-button>
+      <paper-button raised hidden$="{{!configReady}}" on-tap="uploadAppSettingsToProxy">Upload App Settings File</paper-button>
+
       <div hidden$="{{!error}}">Ups..Error: {{error}}</div>
     <!-- <div>Base64: <span>{{convertedConfig.base64AppConfig}}</span></div> -->
 

@@ -25,6 +25,7 @@ import 'package:polymer_elements/hardware_icons.dart';
 import 'package:polymer_elements/maps_icons.dart';
 import 'package:polymer/polymer.dart';
 import 'package:web_components/web_components.dart';
+import 'package:custom_elements/paper_chip.dart';
 
 
 //import 'package:polymer_elements/iron_flex_layout.dart'; // to allow flexbox styling

@@ -26,6 +26,7 @@
                 <div>Selected Device: [[device.deviceId]] </div>
                 <div>Description: [[device.description]]</div>
                 <div>App Settings Version: [[device.appsettingsVersion]]</div>
+
                 <div>URL: <a href="[[device.appsettingsUrl]]">[[device.appsettingsUrl]]</a> </div>
                 <div>
                   <paper-button on-tap="showFileContentDialog">Show File <paper-button>
@@ -40,7 +41,14 @@
             </paper-item-body>
         </paper-icon-item>
 
-          <features-map road-features=[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.features]] ></features-map>
+        <features-map road-features=[[appsettings.appConfigJson.appConfig.testingConfig.defaultRoadFeature.features]] ></features-map>
+        <template is="dom-repeat" items="[[appsettings.appConfigJson.appConfig.trialConfig.acceptedUsers.data]]" >
+          <paper-chip>
+            <div class="icon">L</div>
+            <h1>[[item.name]]</h1>
+            <h2>[[item.data.country]] [[item.data.lpn]]</h2>
+          </paper-chip>
+        </template>
 
         </paper-material>
 
