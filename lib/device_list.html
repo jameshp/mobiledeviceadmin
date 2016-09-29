@@ -32,8 +32,8 @@
 
     <template>
 
-        <paper-input label="URL" value="{{url}}"></paper-input>
-        <paper-input label="detail url " value="{{detailUrl}}"></paper-input>
+        <!-- <paper-input label="URL" value="{{url}}"></paper-input>
+        <paper-input label="detail url " value="{{detailUrl}}"></paper-input> -->
 
         <iron-ajax id="deviceRequest" verbose timeout="10000" url="[[url]]" headers="[[user.authorizationHeader]]" handle-as="json" loading="{{loading}}" on-error="handleRequestError" last-response="{{ajaxResponse}}" last-error="{{ajaxError}}">
         </iron-ajax>

@@ -28,6 +28,7 @@ import 'package:web_components/web_components.dart';
 import 'package:custom_elements/paper_chip.dart';
 
 
+
 //import 'package:polymer_elements/iron_flex_layout.dart'; // to allow flexbox styling
 
 /// Uses [PaperInput]
@@ -97,7 +98,7 @@ class AppsettingsDetail extends PolymerElement {
 
     AnchorElement tl = document.createElement('a');
     tl..attributes['href'] = Url.createObjectUrlFromBlob(blob).toString()//'data:text/plain;charset=utf-8,' + Uri.encodeComponent(text)
-      ..attributes['download'] = "superFilename.json"
+      ..attributes['download'] = "appSettings_" + device['deviceId'].toString() + "_" + device['appsettingsVersion'].toString() + ".json"
       ..click();
     }
 

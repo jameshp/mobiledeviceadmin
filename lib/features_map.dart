@@ -42,6 +42,8 @@ class FeatureMap extends PolymerElement {
   @Property(notify: true, observer: 'roadFeaturesChanged')
   List roadFeatures;
 
+  @Property(notify: true, observer: 'virtualGantryDetectionsChanged')
+  List virtualGantryDetections;
 
   @reflectable
   void roadFeaturesChanged(newValue, oldValue){
@@ -54,6 +56,11 @@ class FeatureMap extends PolymerElement {
       }
       //roadFeatures.forEach( (f) => drawPolyLine(f) );
       map.fitBounds(bounds);
+  }
+
+  @reflectable
+  void virtualGantryDetectionsChanged(newVirtualGantries, oldVirtualGandries){
+    //TODO --> implement 
   }
 
   drawPolyLine(Map roadFeature){

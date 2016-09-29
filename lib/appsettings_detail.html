@@ -29,7 +29,7 @@
 
                 <div>URL: <a href="[[device.appsettingsUrl]]">[[device.appsettingsUrl]]</a> </div>
                 <div>
-                  <paper-button on-tap="showFileContentDialog">Show File <paper-button>
+                  <paper-button raised on-tap="showFileContentDialog">Show File<paper-button>
                 </div>
                 <iron-ajax id="settingsRequest" auto verbose url="[[device.appsettingsUrl]]" headers='{"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}' handle-as="text" on-response="processSettingsResponse" last-response="{{rawAppSettings}}">
                 </iron-ajax>
