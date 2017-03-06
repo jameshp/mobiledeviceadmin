@@ -40,43 +40,46 @@ class User extends JsProxy {
   @reflectable
   String authorizationToken;
 
-  User(this.username, this.password, this.authorizationHeader, this.authorizationToken);
+  User(this.username, this.password, this.authorizationHeader,
+      this.authorizationToken);
 }
 
- class Environment extends JsProxy{
-   @reflectable
-   String deviceListUrl;
+class Environment extends JsProxy {
+  @reflectable
+  String deviceListUrl;
 
-   @reflectable
-   String deviceDetailUrl;
+  @reflectable
+  String deviceDetailUrl;
 
-   @reflectable
-   String appSettingsUrl;
+  @reflectable
+  String appSettingsUrl;
 
-   @reflectable
-   String protobufAppconfigConverterUrl;
+  @reflectable
+  String protobufAppconfigConverterUrl;
 
-   @reflectable
-   String jsonToProtobufConverterUrl;
+  @reflectable
+  String jsonToProtobufConverterUrl;
 
-   @reflectable
-   String name;
+  @reflectable
+  String name;
 
-   Environment(this.name, this.deviceListUrl, this.deviceDetailUrl, this.appSettingsUrl, this.protobufAppconfigConverterUrl, this.jsonToProtobufConverterUrl);
- }
-
+  Environment(
+      this.name,
+      this.deviceListUrl,
+      this.deviceDetailUrl,
+      this.appSettingsUrl,
+      this.protobufAppconfigConverterUrl,
+      this.jsonToProtobufConverterUrl);
+}
 
 /// Uses [PaperInput]
 @PolymerRegister('config-settings')
 class ConfigSettings extends PolymerElement {
-
   @Property(notify: true)
   Environment environment;
 
   @Property(notify: true)
   User user;
-
-
 
   /// Constructor used to create instance of MainApp.
   ConfigSettings.created() : super.created();
@@ -86,10 +89,32 @@ class ConfigSettings extends PolymerElement {
   ready() {
     //set('environment', new Environment("TEST", "test_devices.json", "https://qa.stlproxy.kapschtraffic.com:8443/smartphone/v2/devices", "test_appsettings.json", "http://192.168.99.100:8080/appconfigapi/v1/appconfig"));
     //set('environment', new Environment("SIT", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings", "http://192.168.99.100:8081/appconfigapi/v1/appconfig", "http://192.168.99.100:8081/appconfigapi/v1/json2base64"));
-    set('environment', new Environment("SIT localhost", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings", "http://localhost:8080/appconfigapi/v1/appconfig", "http://localhost:8080/appconfigapi/v1/json2base64"));
-    //set('environment', new Environment("SIT EXT", "https://qa.stlproxy.kapschtraffic.com:8443/eqm/v1/devices", "https://qa.stlproxy.kapschtraffic.com:8443/eqm//smartphone/v2/devices", "https://qa.stlproxy.kapschtraffic.com:8443/eqm/v1/appsettings", "http://138.68.66.69:8081/appconfigapi/v1/appconfig", "http://138.68.66.69:8081/appconfigapi/v1/json2base64"));
-
-    set('user', new User("polt","polt", {"Authorization" : "Basic dXNlcjE6cGFzc3dvcmQ="}, "Basic dXNlcjE6cGFzc3dvcmQ="));
+    //set('environment', new Environment("SIT localhost", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/smartphone/v2/devices", "http://equipmentmanager.service.sitstlproxy.gpsllab.local/v1/appsettings", "http://localhost:8080/appconfigapi/v1/appconfig", "http://localhost:8080/appconfigapi/v1/json2base64"));
+    // set(
+    //     'environment',
+    //     new Environment(
+    //         "SIT EXT",
+    //         "https://qa.stlproxy.kapschtraffic.com:8443/eqm/v1/devices",
+    //         "https://qa.stlproxy.kapschtraffic.com:8443/eqm//smartphone/v2/devices",
+    //         "https://qa.stlproxy.kapschtraffic.com:8443/eqm/v1/appsettings",
+    //         "http://138.68.66.69:8081/appconfigapi/v1/appconfig",
+    //         "http://138.68.66.69:8081/appconfigapi/v1/json2base64"));
+    set(
+        'environment',
+        new Environment(
+            "SIT MIXED",
+            "https://qa.stlproxy.kapschtraffic.com:8443/eqm/v1/devices",
+            "https://qa.stlproxy.kapschtraffic.com:8443/eqm//smartphone/v2/devices",
+            "https://qa.stlproxy.kapschtraffic.com:8443/eqm/v1/appsettings",
+            "http://localhost:8080/appconfigapi/v1/appconfig",
+            "http://localhost:8080/appconfigapi/v1/json2base64"));
+    set(
+        'user',
+        new User(
+            "polt",
+            "polt",
+            {"Authorization": "Basic dXNlcjE6cGFzc3dvcmQ="},
+            "Basic dXNlcjE6cGFzc3dvcmQ="));
     print("Config Settings Item created");
   }
 }
