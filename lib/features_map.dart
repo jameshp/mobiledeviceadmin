@@ -5,6 +5,7 @@ library mobiledeviceadmin.lib.features_map;
 
 import 'dart:html';
 import 'dart:core';
+import 'dart:convert'; //used for JSON encoding
 import 'package:google_maps/google_maps.dart';
 
 // import 'package:polymer_elements/paper_input.dart';
@@ -128,22 +129,41 @@ class FeatureMap extends PolymerElement {
     int triggerIndex = roadFeature['properties']['triggerIndex'];
     String name = roadFeature['properties']['name'];
     String id = roadFeature['properties']['id'];
+    String radius = roadFeature['properties']['maxDistance'];
     String directions = roadFeature['properties']['direction'] == 0
         ? "one direction"
         : "both directions";
-    String actions = roadFeature['properties']['actions'];
+    List actions = roadFeature['properties']['actions'];
+
+    String  zoneType = "tolling";
+    String zoneIconUrl = "";
+
+    for (Map a in actions) {
+      if (a['action'] == "exit"){
+        zoneType = "exit";
+        zoneIconUrl = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+      }
+      if( a['action'] == "entry"){
+        zoneType = "entry";
+        zoneIconUrl = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+      }
+    }
+    //Map<key, value> actionsJson = JSON.decode(actions)
 
     var markerCoordinates =
         roadFeature['geometry']['coordinates'][triggerIndex];
     var point = new LatLng(markerCoordinates['lat'], markerCoordinates['lon']);
 
     InfoWindow info = new InfoWindow(new InfoWindowOptions()
-      ..content = """<div>Zone Id: $id </div>
+      ..content = """<div><b>Zone Id: $id </b></div>
+                     <div> Radius: $radius </div>
+                     <div> ZoneType: $zoneType </div>
                      <div> Name: $name </div>
                      <div> Directions: $directions</div>
                      <div> Actions: $actions</div>""");
 
     Marker m = new Marker(new MarkerOptions()
+      ..icon = zoneIconUrl
       ..position = point
       ..map = map
       ..title = name);
